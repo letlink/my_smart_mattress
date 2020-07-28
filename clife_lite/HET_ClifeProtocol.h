@@ -1,12 +1,12 @@
 /******************************************************************************\
-**  °æ    È¨ :  ÉîÛÚÊĞºÍ¶øÌ©ÖÇÄÜ¿ØÖÆ¹É·İÓĞÏŞ¹«Ë¾ËùÓĞ£¨2020£©
-**  ÎÄ¼şÃû³Æ :  HET_ClifeProtocol.h
-**  ¹¦ÄÜÃèÊö :  CPÍ¨Ñ¶Ïà¹ØÇı¶¯£¬°üÀ¨Õı³£Í¨Ñ¶£¬ÒÔ¼°ÔÚÏßÉı¼¶
-**  ×÷    Õß :  vincent
-**  ÈÕ    ÆÚ :  2020.07.01
-**  °æ    ±¾ :  V0.0.1
-**  ±ä¸ü¼ÇÂ¼ :  V0.0.1/2020.07.01
-                1 Ê×´Î´´½¨                 
+**  ç‰ˆ    æƒ :  æ·±åœ³å¸‚å’Œè€Œæ³°æ™ºèƒ½æ§åˆ¶è‚¡ä»½æœ‰é™å…¬å¸æ‰€æœ‰ï¼ˆ2020ï¼‰
+**  æ–‡ä»¶åç§° :  HET_ClifeProtocol.h
+**  åŠŸèƒ½æè¿° :  CPé€šè®¯ç›¸å…³é©±åŠ¨ï¼ŒåŒ…æ‹¬æ­£å¸¸é€šè®¯ï¼Œä»¥åŠåœ¨çº¿å‡çº§
+**  ä½œ    è€… :  vincent
+**  æ—¥    æœŸ :  2020.07.01
+**  ç‰ˆ    æœ¬ :  V0.0.1
+**  å˜æ›´è®°å½• :  V0.0.1/2020.07.01
+                1 é¦–æ¬¡åˆ›å»º                 
 \******************************************************************************/
 
 #ifndef _HET_CLIFEPROTOCOL_H_
@@ -21,37 +21,37 @@
 /******************************************************************************\
                           Macro definitions
 \******************************************************************************/
-#define CP_PACK_HEAD                0xA5                    //Ğ­Òé°üÍ·
+#define CP_PACK_HEAD                0xA5                    //åè®®åŒ…å¤´
 
-#define CP_RECV_LEN				    250                     //½ÓÊÕ»º´æÊı×é³¤¶È
-#define CP_SEND_LEN				    512                     //·¢ËÍ»º´æÊı×é³¤¶È
-#define CP_SEND_TEMP_LEN			512                     //·¢ËÍ»º´æÊı×é³¤¶È
+#define CP_RECV_LEN				    250                     //æ¥æ”¶ç¼“å­˜æ•°ç»„é•¿åº¦
+#define CP_SEND_LEN				    512                     //å‘é€ç¼“å­˜æ•°ç»„é•¿åº¦
+#define CP_SEND_TEMP_LEN			512                     //å‘é€ç¼“å­˜æ•°ç»„é•¿åº¦
 
 
-#define BIT_CP_BIND				    0x10					//WiFi×´Ì¬×Ö°ó¶¨±êÖ¾Î»
-#define BIT_CP_ROUTER				0x20                    //WiFi×´Ì¬×ÖÂ·ÓÉÆ÷Á¬½Ó±êÖ¾Î»
-#define BIT_CP_SERVICE				0x40					//WiFi×´Ì¬×Ö·şÎñÆ÷Á¬½Ó±êÖ¾Î»
-#define BIT_CP_ALL					0x70					//WiFi×´Ì¬×ÖÈ«²¿Á¬½Ó±êÖ¾Î»
+#define BIT_CP_BIND				    0x10					//WiFiçŠ¶æ€å­—ç»‘å®šæ ‡å¿—ä½
+#define BIT_CP_ROUTER				0x20                    //WiFiçŠ¶æ€å­—è·¯ç”±å™¨è¿æ¥æ ‡å¿—ä½
+#define BIT_CP_SERVICE				0x40					//WiFiçŠ¶æ€å­—æœåŠ¡å™¨è¿æ¥æ ‡å¿—ä½
+#define BIT_CP_ALL					0x70					//WiFiçŠ¶æ€å­—å…¨éƒ¨è¿æ¥æ ‡å¿—ä½
 
-#define CP_TEST_TIMEOUT			    3                       //²ú²âÃüÁî·¢ËÍ³¬Ê±´ÎÊı
-#define CP_TEST_MAX_TIMES			60						//²ú²â³¬Ê±Ê±¼ä(1·ÖÖÓ)
-#define COMMAND_ERROR_RESET			6						//Í¨Ñ¶Òì³£¼ÆÊı
+#define CP_TEST_TIMEOUT			    3                       //äº§æµ‹å‘½ä»¤å‘é€è¶…æ—¶æ¬¡æ•°
+#define CP_TEST_MAX_TIMES			60						//äº§æµ‹è¶…æ—¶æ—¶é—´(1åˆ†é’Ÿ)
+#define COMMAND_ERROR_RESET			6						//é€šè®¯å¼‚å¸¸è®¡æ•°
 
-#define HET_CP_DELAY_MS(x)			(x)                     //ºÁÃëÑÓ³Ù
-#define HET_CP_DELAY_S(x)			((uint32_t)100*(x))     //ÃëÑÓ³Ù
+#define HET_CP_DELAY_MS(x)			(x)                     //æ¯«ç§’å»¶è¿Ÿ
+#define HET_CP_DELAY_S(x)			((uint32_t)100*(x))     //ç§’å»¶è¿Ÿ
 
-#define	HET_CP_SEND_IDLE			0                       //·¢ËÍ¿ÕÏĞ
-#define	HET_CP_SEND_CYCLE			10                     //·¢ËÍ¼ä¸ô,¼ä¸ôÊ±¼äÎª£ºHET_CP_SEND_CYCLE*10ms
+#define	HET_CP_SEND_IDLE			0                       //å‘é€ç©ºé—²
+#define	HET_CP_SEND_CYCLE			10                     //å‘é€é—´éš”,é—´éš”æ—¶é—´ä¸ºï¼šHET_CP_SEND_CYCLE*10ms
 
-//Éè±¸ĞÅÏ¢
-#define DEVICE_INFO_LEN             32                          //Éè±¸ĞÅÏ¢×Ö½Ú³¤¶È
-#define SOFT_VERSION                0x01                        //Èí¼ş°æ±¾
-#define HARD_VERSION                0x01                        //Çı¶¯°åÓ²¼ş°æ±¾
-#define DEVICE_MODEL                "NULL"                      //Õû»úĞÍºÅ
-#define DEVICE_RESERVED             "NULL"                      //Ô¤Áô
+//è®¾å¤‡ä¿¡æ¯
+#define DEVICE_INFO_LEN             32                          //è®¾å¤‡ä¿¡æ¯å­—èŠ‚é•¿åº¦
+#define SOFT_VERSION                0x01                        //è½¯ä»¶ç‰ˆæœ¬
+#define HARD_VERSION                0x01                        //é©±åŠ¨æ¿ç¡¬ä»¶ç‰ˆæœ¬
+#define DEVICE_MODEL                "NULL"                      //æ•´æœºå‹å·
+#define DEVICE_RESERVED             "NULL"                      //é¢„ç•™
 
-#define CP_MASTER_MODE                 0 //Ö÷»úÍ¨³£Ö¸Ö÷¿ØMCU
-#define CP_SLAVE_MODE                  1 //´Ó»úÍ¨³£Ö¸WiFiÄ£×é¡¢GUI°åµÈ
+#define CP_MASTER_MODE                 0 //ä¸»æœºé€šå¸¸æŒ‡ä¸»æ§MCU
+#define CP_SLAVE_MODE                  1 //ä»æœºé€šå¸¸æŒ‡WiFiæ¨¡ç»„ã€GUIæ¿ç­‰
 #define CP_MODE                     CP_SLAVE_MODE//MASTER_MODE//
 
 #ifndef HET_PLUGIN_CP_NUM
@@ -73,134 +73,134 @@
 #pragma pack(1)
 //------------------------------------------------------------------------------
 
-//CMD¼¯ºÏ
+//CMDé›†åˆ
 typedef enum
 {
-    CMD_HEARTBEAT  = 0x01,          	//ĞÄÌø
-    CMD_DEVICEINFO = 0x02,          	//²éÑ¯²úÆ·ĞÅÏ¢
-    CMD_GETDATE    = 0x03,          	//»ñÈ¡Ê±¼äĞÅÏ¢
-    CMD_BINDING    = 0x04,          	//°ó¶¨
-    CMD_TEST       = 0x05,          	//²ú²â
-    CMD_TESTRESULT = 0x06,             //²ú²â½á¹û·µ»Ø
-    CMD_DOWNLOAD   = 0x07,             //Êı¾İÏÂ·¢
-    CMD_UPLOAD     = 0x08,             //Êı¾İÉÏ±¨
-    CMD_DATASYNC   = 0x09,             //Êı¾İÍ¬²½
-    CMD_RESET      = 0x0A,             //¸´Î»
-    CMD_UNBIND     = 0x0B,             //½â³ı°ó¶¨
+    CMD_HEARTBEAT  = 0x01,          	//å¿ƒè·³
+    CMD_DEVICEINFO = 0x02,          	//æŸ¥è¯¢äº§å“ä¿¡æ¯
+    CMD_GETDATE    = 0x03,          	//è·å–æ—¶é—´ä¿¡æ¯
+    CMD_BINDING    = 0x04,          	//ç»‘å®š
+    CMD_TEST       = 0x05,          	//äº§æµ‹
+    CMD_TESTRESULT = 0x06,             //äº§æµ‹ç»“æœè¿”å›
+    CMD_DOWNLOAD   = 0x07,             //æ•°æ®ä¸‹å‘
+    CMD_UPLOAD     = 0x08,             //æ•°æ®ä¸ŠæŠ¥
+    CMD_DATASYNC   = 0x09,             //æ•°æ®åŒæ­¥
+    CMD_RESET      = 0x0A,             //å¤ä½
+    CMD_UNBIND     = 0x0B,             //è§£é™¤ç»‘å®š
 
 }TE_HET_CP_CMD;
 
-//CPÍøÂç×´Ì¬
+//CPç½‘ç»œçŠ¶æ€
 typedef enum
 {
-    HET_ONLINE,                                     //ÔÚÏß
-    HET_OFFLINE,                                    //ÀëÏß
+    HET_ONLINE,                                     //åœ¨çº¿
+    HET_OFFLINE,                                    //ç¦»çº¿
 }TE_HET_NET_STATUS;
 
-//²ú²â½á¹û
+//äº§æµ‹ç»“æœ
 typedef enum
 {
-    FACTORY_IDLE,                                   //Î´²ú²â
-    FACTORY_TESTING,                                //²ú²âÖĞ
-    FACTORY_FAIL,                                   //²ú²âÊ§°Ü
-    FACTORY_PASS,                                   //²ú²â³É¹¦
+    FACTORY_IDLE,                                   //æœªäº§æµ‹
+    FACTORY_TESTING,                                //äº§æµ‹ä¸­
+    FACTORY_FAIL,                                   //äº§æµ‹å¤±è´¥
+    FACTORY_PASS,                                   //äº§æµ‹æˆåŠŸ
 }TE_HET_FACTORYTEST_RESULT;
 
-//´®¿ÚÊı¾İ·¢ËÍ×´Ì¬
+//ä¸²å£æ•°æ®å‘é€çŠ¶æ€
 typedef enum
 {
-    HET_SEND_IDLE,                                  //¿ÕÏĞ×´Ì¬
-    HET_SEND_BUSY,                                  //·¢ËÍÖÜÆÚÖĞ
+    HET_SEND_IDLE,                                  //ç©ºé—²çŠ¶æ€
+    HET_SEND_BUSY,                                  //å‘é€å‘¨æœŸä¸­
 }TE_HET_SENDSTATUS;
 //------------------------------------------------------------------------------
 typedef struct
 {
-    uint8_t 				    Id;				//Êı¾İID
-    uint8_t 				    Len;			//Êı¾İ³¤¶È
-    uint8_t* 				    pData;           //Êı¾İÖ¸Õë
+    uint8_t 				    Id;				//æ•°æ®ID
+    uint8_t 				    Len;			//æ•°æ®é•¿åº¦
+    uint8_t* 				    pData;           //æ•°æ®æŒ‡é’ˆ
 }TS_HET_DATA_UNIT;
 
 //------------------------------------------------------------------------------
 
-//Éè±¸ĞÅÏ¢
+//è®¾å¤‡ä¿¡æ¯
 typedef struct
 {
-    uint8_t 				    SoftwareVer;				//Èí¼ş°æ±¾ĞÅÏ¢
-    uint8_t 				    HardwareVer;				//Ó²¼ş°æ±¾ĞÅÏ¢
-    uint8_t 				    DeviceProductModel[15];     //²úÆ·ĞÍºÅ
-    uint8_t 				    Reserve2[15];               //±£Áô×Ö
+    uint8_t 				    SoftwareVer;				//è½¯ä»¶ç‰ˆæœ¬ä¿¡æ¯
+    uint8_t 				    HardwareVer;				//ç¡¬ä»¶ç‰ˆæœ¬ä¿¡æ¯
+    uint8_t 				    DeviceProductModel[15];     //äº§å“å‹å·
+    uint8_t 				    Reserve2[15];               //ä¿ç•™å­—
 }TS_HET_CP_DEVICEINFO;
 
-//ÏµÍ³Ê±¼ä
+//ç³»ç»Ÿæ—¶é—´
 typedef struct
 {
-    uint8_t 				    Year;				//Äê
-    uint8_t 				    Month;				//ÔÂ
-    uint8_t 				    Date;               //ÈÕ
-    uint8_t 				    Hours;              //Ê±
-    uint8_t 				    Minutes;            //·Ö
-    uint8_t 				    Seconds;            //Ãë
-    uint8_t 				    Weekday;            //ĞÇÆÚ
+    uint8_t 				    Year;				//å¹´
+    uint8_t 				    Month;				//æœˆ
+    uint8_t 				    Date;               //æ—¥
+    uint8_t 				    Hours;              //æ—¶
+    uint8_t 				    Minutes;            //åˆ†
+    uint8_t 				    Seconds;            //ç§’
+    uint8_t 				    Weekday;            //æ˜ŸæœŸ
 }TS_HET_CP_TIME;
 
 //------------------------------------------------------------------------------
-//CP´®¿Ú½ÓÊÕ×´Ì¬
+//CPä¸²å£æ¥æ”¶çŠ¶æ€
 typedef enum
 {
-    FLOW_UART_RECV_BEGIN,                                   //½ÓÊÕ¿ªÊ¼
-    FLOW_UART_RECV_FINISH,                                  //½ÓÊÕÍê³É
+    FLOW_UART_RECV_BEGIN,                                   //æ¥æ”¶å¼€å§‹
+    FLOW_UART_RECV_FINISH,                                  //æ¥æ”¶å®Œæˆ
 }TE_CP_RECV_FLOW;
     
-//·¢ËÍÊı¾İ½á¹¹Ìå
+//å‘é€æ•°æ®ç»“æ„ä½“
 typedef struct
 {
-    uint8_t					    ReceiveBuf[CP_RECV_LEN];	//MCU½ÓÊÕWIFIÊı¾İµÄ»º´æ	
-    uint8_t					    ReceiveF;                   //½ÓÊÕ±êÖ¾Î»
-    uint16_t             	    ReceiveLen;                 //½ÓÊÕWIFIÊı¾İµÄ³¤¶È
-    TE_CP_RECV_FLOW		        ReceiveFlow;                //½ÓÊÕWIFIÊı¾İµÄÁ÷³ÌÃ¶¾Ù
+    uint8_t					    ReceiveBuf[CP_RECV_LEN];	//MCUæ¥æ”¶WIFIæ•°æ®çš„ç¼“å­˜	
+    uint8_t					    ReceiveF;                   //æ¥æ”¶æ ‡å¿—ä½
+    uint16_t             	    ReceiveLen;                 //æ¥æ”¶WIFIæ•°æ®çš„é•¿åº¦
+    TE_CP_RECV_FLOW		        ReceiveFlow;                //æ¥æ”¶WIFIæ•°æ®çš„æµç¨‹æšä¸¾
     
 }TS_CPCOMM_RECV;
 
-//½ÓÊÕÊı¾İ½á¹¹Ìå
+//æ¥æ”¶æ•°æ®ç»“æ„ä½“
 typedef struct
 {
-    uint8_t					    SendTempBuff[CP_SEND_TEMP_LEN];//·¢ËÍÁÙÊ±»º´æ
-    uint8_t					    SendBuff[CP_SEND_LEN];      //·¢ËÍ»º´æ
-    uint16_t                    UpdateIndex;                //·¢ËÍ¸üĞÂË÷Òı£¬·¢ËÍÍê³ÉºóÇåÁã
-    uint16_t                    SendDelay;                  //·¢ËÍ¼ä¸ô
+    uint8_t					    SendTempBuff[CP_SEND_TEMP_LEN];//å‘é€ä¸´æ—¶ç¼“å­˜
+    uint8_t					    SendBuff[CP_SEND_LEN];      //å‘é€ç¼“å­˜
+    uint16_t                    UpdateIndex;                //å‘é€æ›´æ–°ç´¢å¼•ï¼Œå‘é€å®Œæˆåæ¸…é›¶
+    uint16_t                    SendDelay;                  //å‘é€é—´éš”
 }TS_CPCOMM_SEND;
 //------------------------------------------------------------------------------
-//º¯ÊıÖ¸Õë½á¹¹Ìå
+//å‡½æ•°æŒ‡é’ˆç»“æ„ä½“
 typedef struct
 {
-    void (*UartSendCallback) (uint8_t *pBuf, uint16_t Len);           // ´®¿Ú·¢ËÍ»Øµ÷
+    void (*UartSendCallback) (uint8_t *pBuf, uint16_t Len);           // ä¸²å£å‘é€å›è°ƒ
 
     #if CP_MODE == MASTER_MODE
-    void (*DownloadRxCallback)(uint8_t *pBuf, uint16_t Len);            // MCU½ÓÊÕÊı¾İÏÂ·¢´¦Àí»Øµ÷
-    void (*SyncTimeRxCallback)(uint8_t *pBuf, uint16_t Len);            // MCU½ÓÊÕÍøÂçÊ±¼ä´¦Àí»Øµ÷
-    void (*SyncDataTxCallback)(void);                                   // MCU·¢ËÍÊı¾İÍ¬²½´¦Àí»Øµ÷
+    void (*DownloadRxCallback)(uint8_t *pBuf, uint16_t Len);            // MCUæ¥æ”¶æ•°æ®ä¸‹å‘å¤„ç†å›è°ƒ
+    void (*SyncTimeRxCallback)(uint8_t *pBuf, uint16_t Len);            // MCUæ¥æ”¶ç½‘ç»œæ—¶é—´å¤„ç†å›è°ƒ
+    void (*SyncDataTxCallback)(void);                                   // MCUå‘é€æ•°æ®åŒæ­¥å¤„ç†å›è°ƒ
     #else
-    void (*UploadRxCallback)(uint8_t *pBuf, uint16_t Len);              // Ä£×éÊÕµ½Êı¾İÉÏ´«´¦Àí»Øµ÷
-    void (*DevInfoRxCallback)(TS_HET_CP_DEVICEINFO* pThis);             // Ä£×éÊÕµ½Éè±¸ĞÅÏ¢´¦Àí»Øµ÷
-    void (*SyncDataRxCallback)(uint8_t *pBuf, uint16_t Len);            // Ä£×éÊÕµ½Êı¾İÍ¬²½´¦Àí»Øµ÷
-    void (*GetSysTimeInfo)(TS_HET_CP_TIME* pTime);                      // Ä£×é»ñÈ¡ÏµÍ³Ê±¼ä»Øµ÷
-    void (*FactoryTest)(void);                                          // Ä£×é²ú²â»Øµ÷
-    void (*ResetProcess)(void);                                         // Ä£×é¸´Î»´¦Àí
+    void (*UploadRxCallback)(uint8_t *pBuf, uint16_t Len);              // æ¨¡ç»„æ”¶åˆ°æ•°æ®ä¸Šä¼ å¤„ç†å›è°ƒ
+    void (*DevInfoRxCallback)(TS_HET_CP_DEVICEINFO* pThis);             // æ¨¡ç»„æ”¶åˆ°è®¾å¤‡ä¿¡æ¯å¤„ç†å›è°ƒ
+    void (*SyncDataRxCallback)(uint8_t *pBuf, uint16_t Len);            // æ¨¡ç»„æ”¶åˆ°æ•°æ®åŒæ­¥å¤„ç†å›è°ƒ
+    void (*GetSysTimeInfo)(TS_HET_CP_TIME* pTime);                      // æ¨¡ç»„è·å–ç³»ç»Ÿæ—¶é—´å›è°ƒ
+    void (*FactoryTest)(void);                                          // æ¨¡ç»„äº§æµ‹å›è°ƒ
+    void (*ResetProcess)(void);                                         // æ¨¡ç»„å¤ä½å¤„ç†
     
     #endif
 }TS_CPCOMM_FUNC;
 //------------------------------------------------------------------------------
-//×é¼ş½á¹¹Ìå
+//ç»„ä»¶ç»“æ„ä½“
 typedef struct
 {
     TS_CPCOMM_RECV              RX;
     TS_CPCOMM_SEND              TX;
-    TS_CPCOMM_FUNC              Func;                       // º¯ÊıÖ¸Õë
+    TS_CPCOMM_FUNC              Func;                       // å‡½æ•°æŒ‡é’ˆ
 
-    uint8_t 				    CpStatus;					//ÍøÂç×´Ì¬
-    uint8_t                     CpError;                    //Í¨Ñ¶Òì³£
-    uint8_t                     CpFactoryTestStatus;        //²ú²â×´Ì¬
-    uint32_t                    LocalDataType;              //±¾µØÉÏ±¨Êı¾İÀàĞÍ
+    uint8_t 				    CpStatus;					//ç½‘ç»œçŠ¶æ€
+    uint8_t                     CpError;                    //é€šè®¯å¼‚å¸¸
+    uint8_t                     CpFactoryTestStatus;        //äº§æµ‹çŠ¶æ€
+    uint32_t                    LocalDataType;              //æœ¬åœ°ä¸ŠæŠ¥æ•°æ®ç±»å‹
     uint32_t                    CmdFlag;
 
 }TS_HET_CP;
@@ -210,13 +210,13 @@ typedef struct
                     Global variables and functions
 \******************************************************************************/
 /*
-* º¯ÊıÃû³Æ : HET_CP_Drive_UsartRecvISR
-* ¹¦ÄÜÃèÊö : CPÊı¾İ½ÓÊÕÕûÀí
-* ²Î    Êı : pThis- ×é¼şÖ¸Õë
-             pBuf - Êı¾İÖ¸Õë
-             Len  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_CP_Drive_UsartRecvISR
+* åŠŸèƒ½æè¿° : CPæ•°æ®æ¥æ”¶æ•´ç†
+* å‚    æ•° : pThis- ç»„ä»¶æŒ‡é’ˆ
+             pBuf - æ•°æ®æŒ‡é’ˆ
+             Len  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 extern void HET_CP_Drive_UsartRecvISR(TS_HET_CP *pThis, uint8_t *pBuf, uint16_t Len);
@@ -224,11 +224,11 @@ extern void HET_CP_Drive_UsartRecvISR(TS_HET_CP *pThis, uint8_t *pBuf, uint16_t 
 
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_Task
-* ¹¦ÄÜÃèÊö : CPÈÎÎñ£¬Ã¿10msÔËĞĞÒ»´Î
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : HET_CP_Task();
+* å‡½æ•°åç§° : HET_CP_Task
+* åŠŸèƒ½æè¿° : CPä»»åŠ¡ï¼Œæ¯10msè¿è¡Œä¸€æ¬¡
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : HET_CP_Task();
 */
 /******************************************************************************/
 extern void HET_CP_Task(TS_HET_CP *pThis);
@@ -236,15 +236,15 @@ extern void HET_CP_Task(TS_HET_CP *pThis);
 
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_SendDataFrame
-* ¹¦ÄÜÃèÊö : ÓÃ»§Êı¾İ·¢ËÍº¯Êı
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-             Cmd      - ¹¦ÄÜÂë
-             DataId   - Êı¾İID
-             pDataBuf - Êı¾İÖ¸Õë
-             DataLen  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_CP_SendDataFrame
+* åŠŸèƒ½æè¿° : ç”¨æˆ·æ•°æ®å‘é€å‡½æ•°
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+             Cmd      - åŠŸèƒ½ç 
+             DataId   - æ•°æ®ID
+             pDataBuf - æ•°æ®æŒ‡é’ˆ
+             DataLen  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 extern uint8_t HET_CP_SendDataFrame(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_t DataId, uint8_t* pDataBuf, uint8_t DataLen);
@@ -252,11 +252,11 @@ extern uint8_t HET_CP_SendDataFrame(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_t
 
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetConnectStatus
-* ¹¦ÄÜÃèÊö : »ñÈ¡Á¬½Ó×´Ì¬×Ö½Ú
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-* ·µ»ØÖµ   : Status - Á¬½Ó×´Ì¬×Ö½Ú
-* Ê¾    Àı : HET_CP_GetConnectStatus(&Status);
+* å‡½æ•°åç§° : HET_CP_GetConnectStatus
+* åŠŸèƒ½æè¿° : è·å–è¿æ¥çŠ¶æ€å­—èŠ‚
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+* è¿”å›å€¼   : Status - è¿æ¥çŠ¶æ€å­—èŠ‚
+* ç¤º    ä¾‹ : HET_CP_GetConnectStatus(&Status);
 */
 /******************************************************************************/
 extern uint8_t HET_CP_GetConnectStatus(TS_HET_CP *pThis);
@@ -264,49 +264,49 @@ extern uint8_t HET_CP_GetConnectStatus(TS_HET_CP *pThis);
 
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetNetStatus
-* ¹¦ÄÜÃèÊö : »ñÈ¡ÍøÂçÁ¬½Ó×´Ì¬
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : TE_HET_NET_STATUS - HET_ONLINE:ÔÚÏß
-                                 HET_OFFLINE:ÀëÏß
-* Ê¾    Àı : InterStatus = HET_CP_GetNetStatus();
+* å‡½æ•°åç§° : HET_CP_GetNetStatus
+* åŠŸèƒ½æè¿° : è·å–ç½‘ç»œè¿æ¥çŠ¶æ€
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : TE_HET_NET_STATUS - HET_ONLINE:åœ¨çº¿
+                                 HET_OFFLINE:ç¦»çº¿
+* ç¤º    ä¾‹ : InterStatus = HET_CP_GetNetStatus();
 */
 /******************************************************************************/
 extern TE_HET_NET_STATUS HET_CP_GetNetStatus(TS_HET_CP *pThis);
 /******************************************************************************/
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetSignalStrength
-* ¹¦ÄÜÃèÊö : »ñÈ¡WifiĞÅºÅÇ¿¶È
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : WiFiĞÅºÅÇ¿¶È0~10
-* Ê¾    Àı : CPSignalStrength = HET_CP_GetSignalStrength();
+* å‡½æ•°åç§° : HET_CP_GetSignalStrength
+* åŠŸèƒ½æè¿° : è·å–Wifiä¿¡å·å¼ºåº¦
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : WiFiä¿¡å·å¼ºåº¦0~10
+* ç¤º    ä¾‹ : CPSignalStrength = HET_CP_GetSignalStrength();
 */
 /******************************************************************************/
 extern uint8_t HET_CP_GetSignalStrength(TS_HET_CP *pThis);
 /******************************************************************************/
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetData
-* ¹¦ÄÜÃèÊö : »ñÈ¡Êı¾İ·¢ËÍ×´Ì¬
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : HET_SEND_IDLE - ¿ÕÏĞ
-             HET_SEND_BUSY - ·¢ËÍÖÜÆÚÖĞ
-* Ê¾    Àı : Status = HET_CP_SendStatus();
+* å‡½æ•°åç§° : HET_CP_GetData
+* åŠŸèƒ½æè¿° : è·å–æ•°æ®å‘é€çŠ¶æ€
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : HET_SEND_IDLE - ç©ºé—²
+             HET_SEND_BUSY - å‘é€å‘¨æœŸä¸­
+* ç¤º    ä¾‹ : Status = HET_CP_SendStatus();
 */
 /******************************************************************************/
 extern TE_HET_SENDSTATUS HET_CP_SendStatus(TS_HET_CP *pThis);
 /******************************************************************************/
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetFactoryTestStatus
-* ¹¦ÄÜÃèÊö : »ñÈ¡²ú²â×´Ì¬
-* ²Î    Êı : ¿Õ
-* ·µ»ØÖµ   : FACTORY_IDLE(Î´²ú²â)
-             FACTORY_TESTING(²ú²âÖĞ)
-             FACTORY_FAIL(²ú²âÊ§°Ü)
-             FACTORY_PASS(²ú²â³É¹¦)
-* Ê¾    Àı : Status = HET_CP_GetFactoryTestStatus();
+* å‡½æ•°åç§° : HET_CP_GetFactoryTestStatus
+* åŠŸèƒ½æè¿° : è·å–äº§æµ‹çŠ¶æ€
+* å‚    æ•° : ç©º
+* è¿”å›å€¼   : FACTORY_IDLE(æœªäº§æµ‹)
+             FACTORY_TESTING(äº§æµ‹ä¸­)
+             FACTORY_FAIL(äº§æµ‹å¤±è´¥)
+             FACTORY_PASS(äº§æµ‹æˆåŠŸ)
+* ç¤º    ä¾‹ : Status = HET_CP_GetFactoryTestStatus();
 */
 /******************************************************************************/
 extern uint8_t HET_CP_GetFactoryTestStatus(TS_HET_CP* pThis);
@@ -314,10 +314,10 @@ extern uint8_t HET_CP_GetFactoryTestStatus(TS_HET_CP* pThis);
 
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_Open
-* ¹¦ÄÜÃèÊö : Ê¹ÄÜ×é¼ş
-* ²Î    Êı : pThis - ×é¼şÖ¸Õë
-* ·µ»ØÖµ   : TE_HET_STA£º´íÎó´úÂë
+* å‡½æ•°åç§° : HET_CP_Open
+* åŠŸèƒ½æè¿° : ä½¿èƒ½ç»„ä»¶
+* å‚    æ•° : pThis - ç»„ä»¶æŒ‡é’ˆ
+* è¿”å›å€¼   : TE_HET_STAï¼šé”™è¯¯ä»£ç 
 */
 /******************************************************************************/
 extern uint8_t HET_CP_Open(TS_HET_CP* pThis);

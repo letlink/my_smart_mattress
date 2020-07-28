@@ -1,12 +1,12 @@
 /******************************************************************************\
-**  °æ    È¨ :  ÉîÛÚÊĞºÍ¶øÌ©ÖÇÄÜ¿ØÖÆ¹É·İÓĞÏŞ¹«Ë¾ËùÓĞ£¨2020£©
-**  ÎÄ¼şÃû³Æ :  GUI_ClifeProtocol.c
-**  ¹¦ÄÜÃèÊö :  »ùÓÚC-LIFE¼ò»¯°æĞ­ÒéµÄGUIÍ¨ĞÅÊ¾Àı
-**  ×÷    Õß :  vincent
-**  ÈÕ    ÆÚ :  2020.07.01
-**  °æ    ±¾ :  V0.0.1
-**  ±ä¸ü¼ÇÂ¼ :  V0.0.1/2020.07.01
-                1 Ê×´Î´´½¨   
+**  ç‰ˆ    æƒ :  æ·±åœ³å¸‚å’Œè€Œæ³°æ™ºèƒ½æ§åˆ¶è‚¡ä»½æœ‰é™å…¬å¸æ‰€æœ‰ï¼ˆ2020ï¼‰
+**  æ–‡ä»¶åç§° :  GUI_ClifeProtocol.c
+**  åŠŸèƒ½æè¿° :  åŸºäºC-LIFEç®€åŒ–ç‰ˆåè®®çš„GUIé€šä¿¡ç¤ºä¾‹
+**  ä½œ    è€… :  vincent
+**  æ—¥    æœŸ :  2020.07.01
+**  ç‰ˆ    æœ¬ :  V0.0.1
+**  å˜æ›´è®°å½• :  V0.0.1/2020.07.01
+                1 é¦–æ¬¡åˆ›å»º   
 \******************************************************************************/
 
 
@@ -49,12 +49,12 @@ extern int ExternalInQueueSend(ExternalEvent* ev);
                              Functions definitions
 \******************************************************************************/ 
 /*
-* º¯ÊıÃû³Æ : reverse_byte
-* ¹¦ÄÜÃèÊö : ´óĞ¡¶Ë×ª»»
-* ²Î    Êı : pBuf:Êı¾İÖ¸Õë
-             num:Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : reverse_byte
+* åŠŸèƒ½æè¿° : å¤§å°ç«¯è½¬æ¢
+* å‚    æ•° : pBuf:æ•°æ®æŒ‡é’ˆ
+             num:æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static unsigned int reverse_byte(unsigned char *c, unsigned char num)
@@ -74,12 +74,12 @@ static unsigned int reverse_byte(unsigned char *c, unsigned char num)
 #if CP_MODE == MASTER_MODE
 
 /*
-* º¯ÊıÃû³Æ : HET_ReportData_Decode_CallBack
-* ¹¦ÄÜÃèÊö : MCU½ÓÊÕÊı¾İÏÂ·¢´¦Àí»Øµ÷
-* ²Î    Êı : pBuf - Êı¾İÖ¸Õë
-             Len  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : HET_ReportData_Decode_CallBack(&pBuf,Len);
+* å‡½æ•°åç§° : HET_ReportData_Decode_CallBack
+* åŠŸèƒ½æè¿° : MCUæ¥æ”¶æ•°æ®ä¸‹å‘å¤„ç†å›è°ƒ
+* å‚    æ•° : pBuf - æ•°æ®æŒ‡é’ˆ
+             Len  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : HET_ReportData_Decode_CallBack(&pBuf,Len);
 */
 /******************************************************************************/
 static void HET_GUI_DownloadRxCallback(uint8_t *pBuf, uint16_t Len)
@@ -96,7 +96,7 @@ static void HET_GUI_DownloadRxCallback(uint8_t *pBuf, uint16_t Len)
     TS_GUI_DATA *pGuiData = &g_GUI_Data;
     uint8_t *data = 0;
     uint32_t Temp = 0;
-    //ÓÃ»§Ìí¼Ó½ÓÊÕµ½µÄÊı¾İ½âÎö´úÂë//  
+    //ç”¨æˆ·æ·»åŠ æ¥æ”¶åˆ°çš„æ•°æ®è§£æä»£ç //  
     pRead = pBuf;
     TotalLen = Len;
 
@@ -216,37 +216,37 @@ static void HET_GUI_DownloadRxCallback(uint8_t *pBuf, uint16_t Len)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_SyncTimeRxCallback
-* ¹¦ÄÜÃèÊö : MCU½ÓÊÕÍøÂçÊ±¼ä´¦Àí»Øµ÷
-* ²Î    Êı : pBuf - Êı¾İÖ¸Õë
-             Len  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : HET_Sync_Data_Decode_CallBack(&pBuf,Len);
+* å‡½æ•°åç§° : HET_GUI_SyncTimeRxCallback
+* åŠŸèƒ½æè¿° : MCUæ¥æ”¶ç½‘ç»œæ—¶é—´å¤„ç†å›è°ƒ
+* å‚    æ•° : pBuf - æ•°æ®æŒ‡é’ˆ
+             Len  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : HET_Sync_Data_Decode_CallBack(&pBuf,Len);
 */
 /******************************************************************************/
 static void HET_GUI_SyncTimeRxCallback(uint8_t *pBuf, uint16_t Len)
 /******************************************************************************/  
 {
-    //ÓÃ»§´úÂë£¬Ìí¼ÓÍ¬²½Ê±ÖÓÊı¾İ½âÎö´úÂë//
+    //ç”¨æˆ·ä»£ç ï¼Œæ·»åŠ åŒæ­¥æ—¶é’Ÿæ•°æ®è§£æä»£ç //
     /*
-    g_Date.Type;	//Ê±¼ä¸ñÊ½(0:¸ñÁÖÍşÖÎÊ±¼ä,1:±±¾©Ê±¼ä)
-    g_Date.Year;	//Äê
-    g_Date.Month;	//ÔÂ
-    g_Date.Day;		//ÈÕ
-    g_Date.Hour;	//Ê±
-    g_Date.Min;		//·Ö
-    g_Date.Sec;		//Ãë
-    g_Date.Week;	//ĞÇÆÚ
+    g_Date.Type;	//æ—¶é—´æ ¼å¼(0:æ ¼æ—å¨æ²»æ—¶é—´,1:åŒ—äº¬æ—¶é—´)
+    g_Date.Year;	//å¹´
+    g_Date.Month;	//æœˆ
+    g_Date.Day;		//æ—¥
+    g_Date.Hour;	//æ—¶
+    g_Date.Min;		//åˆ†
+    g_Date.Sec;		//ç§’
+    g_Date.Week;	//æ˜ŸæœŸ
     */
     memcpy(&g_Time, pBuf, sizeof(TS_HET_DATE));
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_SyncDataTxCallback
-* ¹¦ÄÜÃèÊö : MCU·¢ËÍÊı¾İÍ¬²½´¦Àí»Øµ÷
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_SyncDataTxCallback
+* åŠŸèƒ½æè¿° : MCUå‘é€æ•°æ®åŒæ­¥å¤„ç†å›è°ƒ
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_SyncDataTxCallback(void)
@@ -257,20 +257,20 @@ static void HET_GUI_SyncDataTxCallback(void)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_UartSendCallback
-* ¹¦ÄÜÃèÊö : ´®¿Ú·¢ËÍ»Øµ÷
-* ²Î    Êı : pBuf:Êı¾İÖ¸Õë
-             Len:Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_UartSendCallback
+* åŠŸèƒ½æè¿° : ä¸²å£å‘é€å›è°ƒ
+* å‚    æ•° : pBuf:æ•°æ®æŒ‡é’ˆ
+             Len:æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_UartSendCallback(uint8_t *pBuf, uint16_t Len)
 /******************************************************************************/
 {
-    //¸ù¾İµ¥Æ¬»úĞÍºÅ¶Ô´Ë´®¿Ú·¢ËÍº¯Êı½øĞĞµ÷Õû//
+    //æ ¹æ®å•ç‰‡æœºå‹å·å¯¹æ­¤ä¸²å£å‘é€å‡½æ•°è¿›è¡Œè°ƒæ•´//
 
-    //Uart1Send(pBuf, Len);							//µ÷ÓÃ´®¿ÚÊı¾İ·¢ËÍº¯Êı
+    //Uart1Send(pBuf, Len);							//è°ƒç”¨ä¸²å£æ•°æ®å‘é€å‡½æ•°
     #if 1
     if((pBuf == 0) || (Len == 0)) return;
     for(int i=0;i<Len;i++)
@@ -285,12 +285,12 @@ static void HET_GUI_UartSendCallback(uint8_t *pBuf, uint16_t Len)
 
 #else
 /*
-* º¯ÊıÃû³Æ : HET_GUI_UploadRxCallback
-* ¹¦ÄÜÃèÊö : Ä£×éÊÕµ½Êı¾İÉÏ´«´¦Àí»Øµ÷
-* ²Î    Êı : pBuf - Êı¾İÖ¸Õë
-             Len  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_UploadRxCallback
+* åŠŸèƒ½æè¿° : æ¨¡ç»„æ”¶åˆ°æ•°æ®ä¸Šä¼ å¤„ç†å›è°ƒ
+* å‚    æ•° : pBuf - æ•°æ®æŒ‡é’ˆ
+             Len  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
@@ -308,7 +308,7 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
     uint8_t *data = 0;
     uint32_t Temp = 0;
     TS_GUI_DATA *pThis = &g_GUI_Data;
-    //ÓÃ»§Ìí¼Ó½ÓÊÕµ½µÄÊı¾İ½âÎö´úÂë//  
+    //ç”¨æˆ·æ·»åŠ æ¥æ”¶åˆ°çš„æ•°æ®è§£æä»£ç //  
     pRead = pBuf;
     TotalLen = Len;
 
@@ -318,17 +318,17 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
     {
         Temp = 0;
         DataId = *pRead++;
-        if(DataId == 0) //IDÎª0ÓÃÓÚÊı¾İÍ¬²½Ö¸Áî
+        if(DataId == 0) //IDä¸º0ç”¨äºæ•°æ®åŒæ­¥æŒ‡ä»¤
         {
             DEBUG("\r\nReceived error data id: %d", DataId);
             return;
         }
         
         DataLen = *pRead++;
-        if(DataLen <= 4) //Êı¾İ³¤¶ÈÓ¦Ğ¡ÓÚ4
+        if(DataLen <= 4) //æ•°æ®é•¿åº¦åº”å°äº4
         {
-            memcpy((uint8_t*)&Temp, pRead, DataLen);//µ¥¸öÊı¾İÖ»Ö§³Ö<=4×Ö½ÚµÄÊı¾İ
-            if ((DATA_ENDIAN == 1) && (DataLen > 1)) //´ó¶ËÄ£Ê½
+            memcpy((uint8_t*)&Temp, pRead, DataLen);//å•ä¸ªæ•°æ®åªæ”¯æŒ<=4å­—èŠ‚çš„æ•°æ®
+            if ((DATA_ENDIAN == 1) && (DataLen > 1)) //å¤§ç«¯æ¨¡å¼
             {
                 Temp = reverse_byte((uint8_t*)&Temp, DataLen);
             }
@@ -612,7 +612,7 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
         TotalLen = TotalLen - DataLen - 2;
     }
 
-    //·¢ËÍÏûÏ¢µ½UIÈÎÎñ£¬¸üĞÂUI¿Ø¼ş
+    //å‘é€æ¶ˆæ¯åˆ°UIä»»åŠ¡ï¼Œæ›´æ–°UIæ§ä»¶
     ev.type = EXTERNAL_UART_UPLOAD_RX;
     ev.arg1 = (int)&g_GUI_Data;
     ExternalInQueueSend(&ev);
@@ -620,11 +620,11 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_DevInfoRxCallback
-* ¹¦ÄÜÃèÊö : Ä£×éÊÕµ½Éè±¸ĞÅÏ¢´¦Àí»Øµ÷
-* ²Î    Êı : pThis - Êı¾İÖ¸Õë
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_DevInfoRxCallback
+* åŠŸèƒ½æè¿° : æ¨¡ç»„æ”¶åˆ°è®¾å¤‡ä¿¡æ¯å¤„ç†å›è°ƒ
+* å‚    æ•° : pThis - æ•°æ®æŒ‡é’ˆ
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_DevInfoRxCallback(TS_HET_CP_DEVICEINFO* pThis)
@@ -639,7 +639,7 @@ static void HET_GUI_DevInfoRxCallback(TS_HET_CP_DEVICEINFO* pThis)
     DEBUG("\r\nProduct model:%s", pThis->DeviceProductModel);
     DEBUG("\r\nReseved:%s", pThis->Reserve2);
 
-    //·¢ËÍÏûÏ¢µ½UIÈÎÎñ£¬¸üĞÂUI¿Ø¼ş
+    //å‘é€æ¶ˆæ¯åˆ°UIä»»åŠ¡ï¼Œæ›´æ–°UIæ§ä»¶
     ev.type = EXTERNAL_UART_DEV_INFO_RX;
     ExternalInQueueSend(&ev);
     
@@ -647,12 +647,12 @@ static void HET_GUI_DevInfoRxCallback(TS_HET_CP_DEVICEINFO* pThis)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_SyncDataRxCallback
-* ¹¦ÄÜÃèÊö : Ä£×éÊÕµ½Êı¾İÍ¬²½´¦Àí»Øµ÷
-* ²Î    Êı : pBuf - Êı¾İÖ¸Õë
-Len  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_SyncDataRxCallback
+* åŠŸèƒ½æè¿° : æ¨¡ç»„æ”¶åˆ°æ•°æ®åŒæ­¥å¤„ç†å›è°ƒ
+* å‚    æ•° : pBuf - æ•°æ®æŒ‡é’ˆ
+Len  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_SyncDataRxCallback(uint8_t *pBuf, uint16_t Len)
@@ -663,7 +663,7 @@ static void HET_GUI_SyncDataRxCallback(uint8_t *pBuf, uint16_t Len)
 
     DEBUG("\r\n%s()", __func__);
 
-    //·¢ËÍÏûÏ¢µ½UIÈÎÎñ£¬¸üĞÂUI¿Ø¼ş
+    //å‘é€æ¶ˆæ¯åˆ°UIä»»åŠ¡ï¼Œæ›´æ–°UIæ§ä»¶
     ev.type = EXTERNAL_UART_SYNC_DATA_RX;
     ExternalInQueueSend(&ev);
     
@@ -671,11 +671,11 @@ static void HET_GUI_SyncDataRxCallback(uint8_t *pBuf, uint16_t Len)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_GetSysTimeInfo
-* ¹¦ÄÜÃèÊö : Ä£×é»ñÈ¡ÏµÍ³Ê±¼ä»Øµ÷
-* ²Î    Êı : pBuf - Êı¾İÖ¸Õë
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_GetSysTimeInfo
+* åŠŸèƒ½æè¿° : æ¨¡ç»„è·å–ç³»ç»Ÿæ—¶é—´å›è°ƒ
+* å‚    æ•° : pBuf - æ•°æ®æŒ‡é’ˆ
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_GetSysTimeInfo(TS_HET_CP_TIME* pTime)
@@ -698,11 +698,11 @@ static void HET_GUI_GetSysTimeInfo(TS_HET_CP_TIME* pTime)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_FactoryTest
-* ¹¦ÄÜÃèÊö : Ä£×é²ú²â»Øµ÷
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_FactoryTest
+* åŠŸèƒ½æè¿° : æ¨¡ç»„äº§æµ‹å›è°ƒ
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_FactoryTest(void)
@@ -714,7 +714,7 @@ static void HET_GUI_FactoryTest(void)
     DEBUG("\r\n%s()", __func__);
     DEBUG("%d", test++);
 
-    //·¢ËÍÏûÏ¢µ½UIÈÎÎñ£¬¸üĞÂUI¿Ø¼ş
+    //å‘é€æ¶ˆæ¯åˆ°UIä»»åŠ¡ï¼Œæ›´æ–°UIæ§ä»¶
     ev.type = EXTERNAL_UART_SYNC_DATA_RX;
     ExternalInQueueSend(&ev);
     
@@ -722,11 +722,11 @@ static void HET_GUI_FactoryTest(void)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_ResetProcess
-* ¹¦ÄÜÃèÊö : Ä£×é¸´Î»´¦Àí
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_ResetProcess
+* åŠŸèƒ½æè¿° : æ¨¡ç»„å¤ä½å¤„ç†
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_ResetProcess(void)
@@ -737,7 +737,7 @@ static void HET_GUI_ResetProcess(void)
 
     DEBUG("\r\n%s()", __func__);
 
-    //·¢ËÍÏûÏ¢µ½UIÈÎÎñ£¬¸üĞÂUI¿Ø¼ş
+    //å‘é€æ¶ˆæ¯åˆ°UIä»»åŠ¡ï¼Œæ›´æ–°UIæ§ä»¶
     ev.type = EXTERNAL_UART_SYNC_DATA_RX;
     ExternalInQueueSend(&ev);
     
@@ -745,20 +745,20 @@ static void HET_GUI_ResetProcess(void)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_UartSendCallback
-* ¹¦ÄÜÃèÊö : ´®¿Ú·¢ËÍ»Øµ÷
-* ²Î    Êı : pBuf:Êı¾İÖ¸Õë
-             Len:Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_UartSendCallback
+* åŠŸèƒ½æè¿° : ä¸²å£å‘é€å›è°ƒ
+* å‚    æ•° : pBuf:æ•°æ®æŒ‡é’ˆ
+             Len:æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static void HET_GUI_UartSendCallback(uint8_t *pBuf, uint16_t Len)
 /******************************************************************************/
 {
-    //¸ù¾İµ¥Æ¬»úĞÍºÅ¶Ô´Ë´®¿Ú·¢ËÍº¯Êı½øĞĞµ÷Õû//
+    //æ ¹æ®å•ç‰‡æœºå‹å·å¯¹æ­¤ä¸²å£å‘é€å‡½æ•°è¿›è¡Œè°ƒæ•´//
 
-    //Uart1Send(pBuf, Len);							//µ÷ÓÃ´®¿ÚÊı¾İ·¢ËÍº¯Êı
+    //Uart1Send(pBuf, Len);							//è°ƒç”¨ä¸²å£æ•°æ®å‘é€å‡½æ•°
     #ifdef _WIN32
     UartSend(MY_WIN32_COM, (char*)pBuf, Len);
     #else
@@ -771,29 +771,29 @@ static void HET_GUI_UartSendCallback(uint8_t *pBuf, uint16_t Len)
 
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_UartRecvCallback
-* ¹¦ÄÜÃèÊö : ´®¿Ú½ÓÊÕ»Øµ÷£¬ÓÃ»§Ğè½«Æä·ÅÖÃÓÚ´®¿Ú½ÓÊÕÍê³É´¦
-* ²Î    Êı : pBuf:Êı¾İÖ¸Õë
-             Len:Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_UartRecvCallback
+* åŠŸèƒ½æè¿° : ä¸²å£æ¥æ”¶å›è°ƒï¼Œç”¨æˆ·éœ€å°†å…¶æ”¾ç½®äºä¸²å£æ¥æ”¶å®Œæˆå¤„
+* å‚    æ•° : pBuf:æ•°æ®æŒ‡é’ˆ
+             Len:æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 void HET_GUI_UartRecvCallback(uint8_t *pBuf, uint16_t Len)
 /******************************************************************************/
 {
-    HET_CP_Drive_UsartRecvISR(&s_GUI_CP, pBuf, Len);	//´®¿Ú½ÓÊÕÊı¾İ´¦Àí
+    HET_CP_Drive_UsartRecvISR(&s_GUI_CP, pBuf, Len);	//ä¸²å£æ¥æ”¶æ•°æ®å¤„ç†
 } 
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_SendDataFrame
-* ¹¦ÄÜÃèÊö : Ğ­ÒéÊı¾İ·¢ËÍ£¬ÓÃ»§¿ÉÔÚĞèÒª·¢ËÍÊı¾İµÄµØ·½µ÷ÓÃ
-* ²Î    Êı : Cmd      - ¹¦ÄÜÂë
-             DataId   - Êı¾İID
-             DataLen  - Êı¾İ³¤¶È
-             pDataBuf - Êı¾İÖ¸Õë
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_SendDataFrame
+* åŠŸèƒ½æè¿° : åè®®æ•°æ®å‘é€ï¼Œç”¨æˆ·å¯åœ¨éœ€è¦å‘é€æ•°æ®çš„åœ°æ–¹è°ƒç”¨
+* å‚    æ•° : Cmd      - åŠŸèƒ½ç 
+             DataId   - æ•°æ®ID
+             DataLen  - æ•°æ®é•¿åº¦
+             pDataBuf - æ•°æ®æŒ‡é’ˆ
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 uint8_t HET_GUI_SendDataFrame(TE_HET_CP_CMD Cmd, uint8_t DataId, uint8_t DataLen, uint8_t* pDataBuf)
@@ -803,10 +803,10 @@ uint8_t HET_GUI_SendDataFrame(TE_HET_CP_CMD Cmd, uint8_t DataId, uint8_t DataLen
     uint32_t Tmp = 0;
     uint8_t res = 0;
     
-    #if CP_MODE == MASTER_MODE //Ö÷»úÄ£Ê½¼´MCU¶Ë²»ÓÃ¿¼ÂÇ´óĞ¡¶Ë
+    #if CP_MODE == MASTER_MODE //ä¸»æœºæ¨¡å¼å³MCUç«¯ä¸ç”¨è€ƒè™‘å¤§å°ç«¯
     res = HET_CP_SendDataFrame(pThis, Cmd, DataId, pDataBuf, DataLen);
     #else
-    if(DATA_ENDIAN) //Éè±¸¶ËÎª´ó¶ËÄ£Ê½£¬·¢³öÈ¥µÄÊı¾İĞè×ª»»
+    if(DATA_ENDIAN) //è®¾å¤‡ç«¯ä¸ºå¤§ç«¯æ¨¡å¼ï¼Œå‘å‡ºå»çš„æ•°æ®éœ€è½¬æ¢
     {
         if((Cmd = CMD_DOWNLOAD) && (DataId != 0))
         {
@@ -824,11 +824,11 @@ uint8_t HET_GUI_SendDataFrame(TE_HET_CP_CMD Cmd, uint8_t DataId, uint8_t DataLen
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_GetDataHandle
-* ¹¦ÄÜÃèÊö : »ñÈ¡Ğ­ÒéÊı¾İÖ¸Õë£¬ÓÃ»§¿ÉÔÚĞèÒª»ñÈ¡Êı¾İµÄµØ·½µ÷ÓÃ
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_GetDataHandle
+* åŠŸèƒ½æè¿° : è·å–åè®®æ•°æ®æŒ‡é’ˆï¼Œç”¨æˆ·å¯åœ¨éœ€è¦è·å–æ•°æ®çš„åœ°æ–¹è°ƒç”¨
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 TS_GUI_DATA* HET_GUI_GetDataHandle(void)
@@ -839,61 +839,61 @@ TS_GUI_DATA* HET_GUI_GetDataHandle(void)
 
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_Init
-* ¹¦ÄÜÃèÊö : Í¨ĞÅĞ­Òé×é¼ş³õÊ¼»¯£¬ÓÃ»§Ğè½«Æä·ÅÖÃÓÚ´®¿Ú³õÊ¼»¯´¦
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_Init
+* åŠŸèƒ½æè¿° : é€šä¿¡åè®®ç»„ä»¶åˆå§‹åŒ–ï¼Œç”¨æˆ·éœ€å°†å…¶æ”¾ç½®äºä¸²å£åˆå§‹åŒ–å¤„
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 void HET_GUI_Init(void)
 /******************************************************************************/
 {
-	////¸ù¾İÊ¹ÓÃµÄMCUĞÍºÅÅäÖÃWiFiÍ¨Ñ¶ĞèÒªµÄ´®¿Ú¼°¸´Î»Òı½Å×ÊÔ´//
+	////æ ¹æ®ä½¿ç”¨çš„MCUå‹å·é…ç½®WiFié€šè®¯éœ€è¦çš„ä¸²å£åŠå¤ä½å¼•è„šèµ„æº//
  //   GPIO_InitTypeDef GPIO_InitStruct;
 
- //   //WiFiÄ£¿é¸´Î»½Å³õÊ¼»¯
+ //   //WiFiæ¨¡å—å¤ä½è„šåˆå§‹åŒ–
 	//WIFI_RESET_RCC_CLK_ENABLE();                                   
 	//GPIO_InitStruct.Pin   = WIFI_RESET_PIN;             
  //   GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP;
  //   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
  //   HAL_GPIO_Init(WIFI_RESET_PORT, &GPIO_InitStruct);
 
- //   //WiFi´®¿Ú³õÊ¼»¯
+ //   //WiFiä¸²å£åˆå§‹åŒ–
  //   UART3_Init(WIFI_BAUDRATE);			
- //   //WiFi½ÓÊÕ´¦Àíº¯ÊıÖ¸Õë
+ //   //WiFiæ¥æ”¶å¤„ç†å‡½æ•°æŒ‡é’ˆ
  //   g_pUart3RxCallback = HET_Wifi_RecvCB;
 	////------------------------------------------------------//
-    /* º¯ÊıÖ¸Õë³õÊ¼»¯ */
+    /* å‡½æ•°æŒ‡é’ˆåˆå§‹åŒ– */
 
-    s_GUI_CP.Func.UartSendCallback = HET_GUI_UartSendCallback;    // ´®¿Ú·¢ËÍ
+    s_GUI_CP.Func.UartSendCallback = HET_GUI_UartSendCallback;    // ä¸²å£å‘é€
 #if CP_MODE == MASTER_MODE
-    s_GUI_CP.Func.DownloadRxCallback   = HET_GUI_DownloadRxCallback;      // MCU½ÓÊÕÊı¾İÏÂ·¢´¦Àí»Øµ÷
-    s_GUI_CP.Func.SyncTimeRxCallback   = HET_GUI_SyncTimeRxCallback;      // MCU½ÓÊÕÍøÂçÊ±¼ä´¦Àí»Øµ÷
-    s_GUI_CP.Func.SyncDataTxCallback   = HET_GUI_SyncDataTxCallback;      // MCU·¢ËÍÊı¾İÍ¬²½´¦Àí»Øµ÷
+    s_GUI_CP.Func.DownloadRxCallback   = HET_GUI_DownloadRxCallback;      // MCUæ¥æ”¶æ•°æ®ä¸‹å‘å¤„ç†å›è°ƒ
+    s_GUI_CP.Func.SyncTimeRxCallback   = HET_GUI_SyncTimeRxCallback;      // MCUæ¥æ”¶ç½‘ç»œæ—¶é—´å¤„ç†å›è°ƒ
+    s_GUI_CP.Func.SyncDataTxCallback   = HET_GUI_SyncDataTxCallback;      // MCUå‘é€æ•°æ®åŒæ­¥å¤„ç†å›è°ƒ
 #else
-    s_GUI_CP.Func.UploadRxCallback     = HET_GUI_UploadRxCallback;        // Ä£×éÊÕµ½Êı¾İÉÏ´«´¦Àí»Øµ÷
-    s_GUI_CP.Func.DevInfoRxCallback    = HET_GUI_DevInfoRxCallback;       // Ä£×éÊÕµ½Éè±¸ĞÅÏ¢´¦Àí»Øµ÷
-    s_GUI_CP.Func.SyncDataRxCallback   = HET_GUI_SyncDataRxCallback;      // Ä£×éÊÕµ½Êı¾İÍ¬²½´¦Àí»Øµ÷
-    s_GUI_CP.Func.GetSysTimeInfo       = HET_GUI_GetSysTimeInfo;          // Ä£×éÊÕµ½Ê±¼äÍ¬²½´¦Àí»Øµ÷
-    s_GUI_CP.Func.FactoryTest          = HET_GUI_FactoryTest;             // Ä£×éÊÕµ½²ú²â´¦Àí»Øµ÷
-    s_GUI_CP.Func.ResetProcess         = HET_GUI_ResetProcess;          // Ä£×é¸´Î»´¦Àí»Øµ÷
+    s_GUI_CP.Func.UploadRxCallback     = HET_GUI_UploadRxCallback;        // æ¨¡ç»„æ”¶åˆ°æ•°æ®ä¸Šä¼ å¤„ç†å›è°ƒ
+    s_GUI_CP.Func.DevInfoRxCallback    = HET_GUI_DevInfoRxCallback;       // æ¨¡ç»„æ”¶åˆ°è®¾å¤‡ä¿¡æ¯å¤„ç†å›è°ƒ
+    s_GUI_CP.Func.SyncDataRxCallback   = HET_GUI_SyncDataRxCallback;      // æ¨¡ç»„æ”¶åˆ°æ•°æ®åŒæ­¥å¤„ç†å›è°ƒ
+    s_GUI_CP.Func.GetSysTimeInfo       = HET_GUI_GetSysTimeInfo;          // æ¨¡ç»„æ”¶åˆ°æ—¶é—´åŒæ­¥å¤„ç†å›è°ƒ
+    s_GUI_CP.Func.FactoryTest          = HET_GUI_FactoryTest;             // æ¨¡ç»„æ”¶åˆ°äº§æµ‹å¤„ç†å›è°ƒ
+    s_GUI_CP.Func.ResetProcess         = HET_GUI_ResetProcess;          // æ¨¡ç»„å¤ä½å¤„ç†å›è°ƒ
 #endif
-    /* ×é¼ş³õÊ¼»¯ */
+    /* ç»„ä»¶åˆå§‹åŒ– */
     if (HET_CP_Open(&s_GUI_CP))
     {
-        // ³õÊ¼»¯Ê§°Ü´¦Àí
+        // åˆå§‹åŒ–å¤±è´¥å¤„ç†
 
     }
 }  
 
 
 /*
-* º¯ÊıÃû³Æ : HET_GUI_Task
-* ¹¦ÄÜÃèÊö : GUIÈÎÎñ£¬ÓÃ»§Ğè½«Æä·ÅÖÃµ½10msÑ­»·ÖĞ
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_GUI_Task
+* åŠŸèƒ½æè¿° : GUIä»»åŠ¡ï¼Œç”¨æˆ·éœ€å°†å…¶æ”¾ç½®åˆ°10mså¾ªç¯ä¸­
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 void HET_GUI_Task(void)

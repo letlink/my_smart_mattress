@@ -1,12 +1,12 @@
 /****************************************************************************************
-**  °æ    È¨ :  ÉîÛÚÊĞºÍ¶øÌ©ÖÇÄÜ¿ØÖÆ¹É·İÓĞÏŞ¹«Ë¾ËùÓĞ£¨2020£©
-**  ÎÄ¼şÃû³Æ :  GUI_DataConfig.c
-**  ¹¦ÄÜÃèÊö :  »ùÓÚC-LIFE¼ò»¯°æĞ­ÒéµÄGUIÊı¾İÅäÖÃ
-**  ×÷    Õß :  vincent
-**  ÈÕ    ÆÚ :  2020.07.01
-**  °æ    ±¾ :  V0.0.1
-**  ±ä¸ü¼ÇÂ¼ :  V0.0.1/2020.07.01
-                1 Ê×´Î´´½¨   
+**  ç‰ˆ    æƒ :  æ·±åœ³å¸‚å’Œè€Œæ³°æ™ºèƒ½æ§åˆ¶è‚¡ä»½æœ‰é™å…¬å¸æ‰€æœ‰ï¼ˆ2020ï¼‰
+**  æ–‡ä»¶åç§° :  GUI_DataConfig.c
+**  åŠŸèƒ½æè¿° :  åŸºäºC-LIFEç®€åŒ–ç‰ˆåè®®çš„GUIæ•°æ®é…ç½®
+**  ä½œ    è€… :  vincent
+**  æ—¥    æœŸ :  2020.07.01
+**  ç‰ˆ    æœ¬ :  V0.0.1
+**  å˜æ›´è®°å½• :  V0.0.1/2020.07.01
+                1 é¦–æ¬¡åˆ›å»º   
 *****************************************************************************************/
 #ifndef _GUI_DATA_CONFIG_H
 #define _GUI_DATA_CONFIG_H
@@ -18,13 +18,13 @@
 /*****************************************************************************************
 								Macro definitions
 *****************************************************************************************/
-#define         DATA_ENDIAN         0   //Éè±¸´óĞ¡¶Ë£¬0£¬Ğ¡¶Ë£¬1£¬´ó¶Ë£¨RAMĞ¾Æ¬Í¨³£ÎªĞ¡¶Ë£¬51Ğ¾Æ¬Í¨³£Îª´ó¶Ë£©
+#define         DATA_ENDIAN         0   //è®¾å¤‡å¤§å°ç«¯ï¼Œ0ï¼Œå°ç«¯ï¼Œ1ï¼Œå¤§ç«¯ï¼ˆRAMèŠ¯ç‰‡é€šå¸¸ä¸ºå°ç«¯ï¼Œ51èŠ¯ç‰‡é€šå¸¸ä¸ºå¤§ç«¯ï¼‰
 /*****************************************************************************************
 								Typedef definitions
 *****************************************************************************************/
 #pragma pack(1)
 
-//Ğ­ÒéÊı¾İ
+//åè®®æ•°æ®
 typedef struct
 {
     uint8_t     mattress_mode;
@@ -74,18 +74,18 @@ typedef struct
     uint8_t     smart_set_out_bed;
 
 
-    uint8_t     temperature;                  //ÎÂ¶È
-    uint8_t     humidity;                     //Êª¶È
+    uint8_t     temperature;                  //æ¸©åº¦
+    uint8_t     humidity;                     //æ¹¿åº¦
     
-    uint8_t	    key_sound_on_off;			  //°´¼üÉùÒô¿ª¹Ø£¬1£º¿ª/0£º¹Ø
-    uint8_t	    backlight;			          //±³¹âÁÁ¶È,
-    uint32_t    time_stamp;                   //ÉèÖÃÏµÍ³Ê±¼ä£¬Ê¹ÓÃÊ±¼ä´Á
-    uint32_t    error_code;                   //´íÎó´úÂë              
+    uint8_t	    key_sound_on_off;			  //æŒ‰é”®å£°éŸ³å¼€å…³ï¼Œ1ï¼šå¼€/0ï¼šå…³
+    uint8_t	    backlight;			          //èƒŒå…‰äº®åº¦,
+    uint32_t    time_stamp;                   //è®¾ç½®ç³»ç»Ÿæ—¶é—´ï¼Œä½¿ç”¨æ—¶é—´æˆ³
+    uint32_t    error_code;                   //é”™è¯¯ä»£ç               
 
 }TS_GUI_DATA;
 #pragma pack()
 
-//Êı¾İID
+//æ•°æ®ID
 typedef enum
 {
     ID_ALL,
@@ -98,7 +98,7 @@ typedef enum
     ID_MASSAGE_TIME_SET,
     ID_MASSAGE_TIME_LEFT,
     
-    ID_SLEEP_AID_ON_OFF,//6
+    ID_SLEEP_AID_ON_OFF,//7
     ID_SLEEP_AID_MUSIC_ON_OFF,
     ID_SLEEP_AID_MUSIC_INDEX,
     ID_SLEEP_AID_LIGHT_ON_OFF,
@@ -106,7 +106,7 @@ typedef enum
     ID_SLEEP_AID_TIME,
     ID_SLEEP_AID_MODE,
     
-    ID_LAMP_ON_OFF,//13
+    ID_LAMP_ON_OFF,//14
     ID_LAMP_LEVEL,
     ID_LAMP_COLOUR_TEMPERATURE,
 
@@ -130,7 +130,7 @@ typedef enum
     ID_ALARM3_WEEKDAY,
     
     
-    ID_STOP_SNORE_ON_OFF,//31
+    ID_STOP_SNORE_ON_OFF,//32
 
     ID_SMART_SET_IN_BED,
     ID_SMART_SET_AFTER_SLEEP,
@@ -147,7 +147,7 @@ typedef enum
     ID_MAX
 }TE_GUI_DATA_ID;
 
-//Êı¾İ³¤¶È
+//æ•°æ®é•¿åº¦
 typedef enum
 {
     LEN_ALL = 45,
@@ -215,12 +215,12 @@ typedef enum
     WORK_ON,
 }TE_GUI_WORK_STATUS;
 /*
-//Êı¾İµ¥Ôª
+//æ•°æ®å•å…ƒ
 typedef struct
 {
-    uint8_t	 DataId;			                        //Êı¾İID
-    uint8_t  DataLen;                                   //Êı¾İ³¤¶È
-    uint8_t* pData;			                            //Êı¾İÖ¸Õë
+    uint8_t	 DataId;			                        //æ•°æ®ID
+    uint8_t  DataLen;                                   //æ•°æ®é•¿åº¦
+    uint8_t* pData;			                            //æ•°æ®æŒ‡é’ˆ
 }TS_GUI_DATA_UNIT;
 */
 

@@ -1,12 +1,12 @@
 /******************************************************************************\
-**  °æ    È¨ :  ÉîÛÚÊĞºÍ¶øÌ©ÖÇÄÜ¿ØÖÆ¹É·İÓĞÏŞ¹«Ë¾ËùÓĞ£¨2020£©
-**  ÎÄ¼şÃû³Æ :  HET_ClifeProtocol.c
-**  ¹¦ÄÜÃèÊö :  CPÍ¨Ñ¶Ïà¹ØÇı¶¯£¬°üÀ¨Õı³£Í¨Ñ¶¡¢ÀúÊ·Êı¾İ½»»¥ÒÔ¼°ÔÚÏßÉı¼¶
-**  ×÷    Õß :  vincent
-**  ÈÕ    ÆÚ :  2020.07.01
-**  °æ    ±¾ :  V0.0.1
-**  ±ä¸ü¼ÇÂ¼ :  V0.0.1/2020.07.01
-                1 Ê×´Î´´½¨  
+**  ç‰ˆ    æƒ :  æ·±åœ³å¸‚å’Œè€Œæ³°æ™ºèƒ½æ§åˆ¶è‚¡ä»½æœ‰é™å…¬å¸æ‰€æœ‰ï¼ˆ2020ï¼‰
+**  æ–‡ä»¶åç§° :  HET_ClifeProtocol.c
+**  åŠŸèƒ½æè¿° :  CPé€šè®¯ç›¸å…³é©±åŠ¨ï¼ŒåŒ…æ‹¬æ­£å¸¸é€šè®¯ã€å†å²æ•°æ®äº¤äº’ä»¥åŠåœ¨çº¿å‡çº§
+**  ä½œ    è€… :  vincent
+**  æ—¥    æœŸ :  2020.07.01
+**  ç‰ˆ    æœ¬ :  V0.0.1
+**  å˜æ›´è®°å½• :  V0.0.1/2020.07.01
+                1 é¦–æ¬¡åˆ›å»º  
 				
 \******************************************************************************/
 
@@ -18,47 +18,47 @@
 /******************************************************************************\
                              Variables definitions
 \******************************************************************************/
-//±¾µØ²Ù×÷¼¯ºÏ
+//æœ¬åœ°æ“ä½œé›†åˆ
 typedef enum
 {
-    CMD_FLG_IDLE        = 0x00000000,		//¿ÕÏĞ
-    CMD_FLG_HEARTBEAT   = 0x00000001,       //ĞÄÌø
-    CMD_FLG_DEVICEINFO  = 0x00000002,		//²éÑ¯²úÆ·ĞÅÏ¢
-    CMD_FLG_GETDATE     = 0x00000004,		//»ñÈ¡Ê±¼äĞÅÏ¢
-    CMD_FLG_BINDING     = 0x00000008,		//°ó¶¨
-    CMD_FLG_TEST        = 0x00000010,		//²ú²â
-    CMD_FLG_TESTRESULT  = 0x00000020,		//²ú²â½á¹û·µ»Ø
-    CMD_FLG_DOWNLOAD    = 0x00000040,		//Êı¾İÏÂ·¢
-    CMD_FLG_UPLOAD      = 0x00000080,		//Êı¾İÉÏ±¨
-    CMD_FLG_DATASYNC    = 0x00000100,		//Êı¾İÍ¬²½
-    CMD_FLG_RESET       = 0x00000200,		//¸´Î»
-    CMD_FLG_UNBIND      = 0x00000400,       //½â³ı°ó¶¨
+    CMD_FLG_IDLE        = 0x00000000,		//ç©ºé—²
+    CMD_FLG_HEARTBEAT   = 0x00000001,       //å¿ƒè·³
+    CMD_FLG_DEVICEINFO  = 0x00000002,		//æŸ¥è¯¢äº§å“ä¿¡æ¯
+    CMD_FLG_GETDATE     = 0x00000004,		//è·å–æ—¶é—´ä¿¡æ¯
+    CMD_FLG_BINDING     = 0x00000008,		//ç»‘å®š
+    CMD_FLG_TEST        = 0x00000010,		//äº§æµ‹
+    CMD_FLG_TESTRESULT  = 0x00000020,		//äº§æµ‹ç»“æœè¿”å›
+    CMD_FLG_DOWNLOAD    = 0x00000040,		//æ•°æ®ä¸‹å‘
+    CMD_FLG_UPLOAD      = 0x00000080,		//æ•°æ®ä¸ŠæŠ¥
+    CMD_FLG_DATASYNC    = 0x00000100,		//æ•°æ®åŒæ­¥
+    CMD_FLG_RESET       = 0x00000200,		//å¤ä½
+    CMD_FLG_UNBIND      = 0x00000400,       //è§£é™¤ç»‘å®š
 }TE_HET_LOCAL_CP_CMD;
 
-//CPĞ­Òé½á¹¹
+//CPåè®®ç»“æ„
 typedef enum
 {
-    CP_INDEX_PACKHEAD,                                      //°üÍ·
-    CP_INDEX_CMD,                                           //ÃüÁî×Ö¸ß×Ö½Ú
-    CP_INDEX_DATA_LEN_H,						            //Êı¾İ³¤¶È¸ß×Ö½Ú
-    CP_INDEX_DATA_LEN_L,						            //Êı¾İ³¤¶ÈµÍ×Ö½Ú
-    CP_INDEX_DATA,                                          //Êı¾İÄÚÈİ
+    CP_INDEX_PACKHEAD,                                      //åŒ…å¤´
+    CP_INDEX_CMD,                                           //å‘½ä»¤å­—é«˜å­—èŠ‚
+    CP_INDEX_DATA_LEN_H,						            //æ•°æ®é•¿åº¦é«˜å­—èŠ‚
+    CP_INDEX_DATA_LEN_L,						            //æ•°æ®é•¿åº¦ä½å­—èŠ‚
+    CP_INDEX_DATA,                                          //æ•°æ®å†…å®¹
 }TE_HET_CPDATAINDEX;
 //------------------------------------------------------------------------------
-//CP´®¿Ú½ÓÊÕ×´Ì¬
+//CPä¸²å£æ¥æ”¶çŠ¶æ€
 typedef enum
 {
-    HISTORY_SEND_IDLE,                                      //·¢ËÍ¿ÕÏĞ
-    HISTORY_SEND_BUSY,                                      //·¢ËÍÖĞ
-    HISTORY_SEND_SUCESS,                                    //·¢ËÍ³É¹¦
-    HISTORY_SEND_FAIL,                                      //·¢ËÍÊ§°Ü
+    HISTORY_SEND_IDLE,                                      //å‘é€ç©ºé—²
+    HISTORY_SEND_BUSY,                                      //å‘é€ä¸­
+    HISTORY_SEND_SUCESS,                                    //å‘é€æˆåŠŸ
+    HISTORY_SEND_FAIL,                                      //å‘é€å¤±è´¥
 }TE_CP_HISTORY_SEND_STATUS;
 
 //------------------------------------------------------------------------------
 static TS_HET_CP    *s_HetCP[HET_PLUGIN_CP_NUM] = { 0 };
 static uint8_t      s_HetCPNum = 0;
 //------------------------------------------------------------------------------
-//Éè±¸ĞÅÏ¢
+//è®¾å¤‡ä¿¡æ¯
 #pragma pack(1)
 #if CP_MODE == MASTER_MODE
 const TS_HET_CP_DEVICEINFO s_DeviceInfo =
@@ -72,7 +72,7 @@ const TS_HET_CP_DEVICEINFO s_DeviceInfo =
 TS_HET_CP_DEVICEINFO s_DeviceInfo;
 #endif
 
-//ÏµÍ³Ê±¼ä
+//ç³»ç»Ÿæ—¶é—´
 TS_HET_CP_TIME s_SysTime;
 
 #pragma pack()
@@ -83,13 +83,13 @@ TS_HET_CP_TIME s_SysTime;
 
 
 /*
-* º¯ÊıÃû³Æ : Het_CP_Drive_CheckSum
-* ¹¦ÄÜÃèÊö : CPĞ­ÒéÊı¾İĞ£Ñé
-* ²Î    Êı : pBuf:Êı¾İÖ¸Õë
-             Len:Êı¾İ³¤¶È
-             pChecksum:Ğ£Ñé½á¹û
-* ·µ»ØÖµ   : ¿Õ
-* Ê¾    Àı : Het_CP_Drive_CheckSum(pBuf,Len,&pChecksum);
+* å‡½æ•°åç§° : Het_CP_Drive_CheckSum
+* åŠŸèƒ½æè¿° : CPåè®®æ•°æ®æ ¡éªŒ
+* å‚    æ•° : pBuf:æ•°æ®æŒ‡é’ˆ
+             Len:æ•°æ®é•¿åº¦
+             pChecksum:æ ¡éªŒç»“æœ
+* è¿”å›å€¼   : ç©º
+* ç¤º    ä¾‹ : Het_CP_Drive_CheckSum(pBuf,Len,&pChecksum);
 */
 /******************************************************************************/
 static void Het_CP_Drive_CheckSum(uint8_t *pBuf,uint16_t Len,uint8_t *pChecksum)
@@ -105,36 +105,36 @@ static void Het_CP_Drive_CheckSum(uint8_t *pBuf,uint16_t Len,uint8_t *pChecksum)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_Drive_UsartRecvISR
-* ¹¦ÄÜÃèÊö : CPÊı¾İ½ÓÊÕÕûÀí
-* ²Î    Êı : pThis- ×é¼şÖ¸Õë
-             pBuf - Êı¾İÖ¸Õë
-             Len  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_CP_Drive_UsartRecvISR
+* åŠŸèƒ½æè¿° : CPæ•°æ®æ¥æ”¶æ•´ç†
+* å‚    æ•° : pThis- ç»„ä»¶æŒ‡é’ˆ
+             pBuf - æ•°æ®æŒ‡é’ˆ
+             Len  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 void HET_CP_Drive_UsartRecvISR(TS_HET_CP *pThis, uint8_t *pBuf, uint16_t Len)
 /******************************************************************************/
 {
 	static uint16_t data_len = 0;
-    // ½ÓÊÕÊı¾İ´ò°ü
-	if(Len == 1)                                    //µ¥×Ö½Ú½ÓÊÕ
+    // æ¥æ”¶æ•°æ®æ‰“åŒ…
+	if(Len == 1)                                    //å•å­—èŠ‚æ¥æ”¶
 	{
         switch (pThis->RX.ReceiveFlow)
 		{
-			//ÅĞ¶ÏÊı¾İÆğÊ¼Ö¡
+			//åˆ¤æ–­æ•°æ®èµ·å§‹å¸§
 			case FLOW_UART_RECV_BEGIN:
-				if(*pBuf == CP_PACK_HEAD)           //½ÓÊÕµ½Ö¡Í·
+				if(*pBuf == CP_PACK_HEAD)           //æ¥æ”¶åˆ°å¸§å¤´
 				{
                     pThis->RX.ReceiveBuf[pThis->RX.ReceiveLen++] = *pBuf;
                     pThis->RX.ReceiveFlow = FLOW_UART_RECV_FINISH;
 				}
 				break;
-			//ÅĞ¶Ï´®¿Ú½ÓÊÕÊÇ·ñÍê³É 
+			//åˆ¤æ–­ä¸²å£æ¥æ”¶æ˜¯å¦å®Œæˆ 
 			case FLOW_UART_RECV_FINISH:
                 pThis->RX.ReceiveBuf[pThis->RX.ReceiveLen++] = *pBuf;
-                if (pThis->RX.ReceiveLen == CP_INDEX_DATA)    //»ñÈ¡µ½Êı¾İ³¤¶È
+                if (pThis->RX.ReceiveLen == CP_INDEX_DATA)    //è·å–åˆ°æ•°æ®é•¿åº¦
 				{
                     data_len = (((uint16_t)(pThis->RX.ReceiveBuf[CP_INDEX_DATA_LEN_H])) << 8) + *pBuf;
 				}
@@ -143,8 +143,8 @@ void HET_CP_Drive_UsartRecvISR(TS_HET_CP *pThis, uint8_t *pBuf, uint16_t Len)
                     if (pThis->RX.ReceiveLen >= data_len + 1)
 					{
                         pThis->RX.ReceiveFlow = FLOW_UART_RECV_BEGIN;
-                        pThis->RX.ReceiveF = true;          //½ÓÊÕÍê³É
-                        pThis->CpError = false;               //CPÍ¨Ñ¶Õı³£
+                        pThis->RX.ReceiveF = true;          //æ¥æ”¶å®Œæˆ
+                        pThis->CpError = false;               //CPé€šè®¯æ­£å¸¸
 					}
 				}
 				break;
@@ -152,26 +152,26 @@ void HET_CP_Drive_UsartRecvISR(TS_HET_CP *pThis, uint8_t *pBuf, uint16_t Len)
 			default:break;	
 		}
 	}	
-	else//ÕûÖ¡½ÓÊÕ                                                        
+	else//æ•´å¸§æ¥æ”¶                                                        
 	{
-		if(pBuf[CP_INDEX_PACKHEAD] == CP_PACK_HEAD)         //½ÓÊÕµ½Ö¡Í·
+		if(pBuf[CP_INDEX_PACKHEAD] == CP_PACK_HEAD)         //æ¥æ”¶åˆ°å¸§å¤´
 		{
-            memcpy(pThis->RX.ReceiveBuf, pBuf, Len);     //¿½±´ÄÚ´æÖĞµÄÊı¾İ
-            pThis->RX.ReceiveLen = Len;                //È¡×öCRCĞ£ÑéµÄÊı¾İ³¤¶È
-            pThis->RX.ReceiveF = true;                 //½ÓÊÕÍê³É
+            memcpy(pThis->RX.ReceiveBuf, pBuf, Len);     //æ‹·è´å†…å­˜ä¸­çš„æ•°æ®
+            pThis->RX.ReceiveLen = Len;                //å–åšCRCæ ¡éªŒçš„æ•°æ®é•¿åº¦
+            pThis->RX.ReceiveF = true;                 //æ¥æ”¶å®Œæˆ
 		}
 	}
 }
 
 /*
-* º¯ÊıÃû³Æ : Het_CP_Drive_UpdateSendTempBuf
-* ¹¦ÄÜÃèÊö : ·¢ËÍÊı¾İ¸üĞÂ£¬¼´½«Òª·¢ËÍµÄÊı¾İ¸üĞÂµ½»º´æ
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-             DataId   - Êı¾İID
-             pDataBuf - Êı¾İÖ¸Õë
-             DataLen  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : Het_CP_Drive_UpdateSendTempBuf
+* åŠŸèƒ½æè¿° : å‘é€æ•°æ®æ›´æ–°ï¼Œå³å°†è¦å‘é€çš„æ•°æ®æ›´æ–°åˆ°ç¼“å­˜
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+             DataId   - æ•°æ®ID
+             pDataBuf - æ•°æ®æŒ‡é’ˆ
+             DataLen  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static uint8_t Het_CP_Drive_UpdateSendTempBuf(TS_HET_CP *pThis, uint8_t DataId, uint8_t *pDataBuf, uint8_t DataLen)
@@ -184,28 +184,28 @@ static uint8_t Het_CP_Drive_UpdateSendTempBuf(TS_HET_CP *pThis, uint8_t DataId, 
     Cmd = CMD_DOWNLOAD;
     #endif
 
-    if(pDataBuf == 0 || DataLen == 0) return false;             //Êı¾İÎª¿Õ
-    if(pThis->TX.UpdateIndex >= CP_SEND_TEMP_LEN) return false; //¶ş¼¶»º´æÒÑÂú
+    if(pDataBuf == 0 || DataLen == 0) return false;             //æ•°æ®ä¸ºç©º
+    if(pThis->TX.UpdateIndex >= CP_SEND_TEMP_LEN) return false; //äºŒçº§ç¼“å­˜å·²æ»¡
     
-    pThis->TX.SendTempBuff[pThis->TX.UpdateIndex++] = DataId;               //¸üĞÂÊı¾İID
-    pThis->TX.SendTempBuff[pThis->TX.UpdateIndex++] = DataLen;              //¸üĞÂÊı¾İ³¤¶È
-    memcpy(&pThis->TX.SendTempBuff[pThis->TX.UpdateIndex],pDataBuf,DataLen);//¸üĞÂÊı¾İÄÚÈİ
+    pThis->TX.SendTempBuff[pThis->TX.UpdateIndex++] = DataId;               //æ›´æ–°æ•°æ®ID
+    pThis->TX.SendTempBuff[pThis->TX.UpdateIndex++] = DataLen;              //æ›´æ–°æ•°æ®é•¿åº¦
+    memcpy(&pThis->TX.SendTempBuff[pThis->TX.UpdateIndex],pDataBuf,DataLen);//æ›´æ–°æ•°æ®å†…å®¹
     pThis->TX.UpdateIndex += DataLen;
-    pThis->CmdFlag |= (uint32_t)1<<(Cmd-1); //¼ÇÂ¼CMD£¬½øĞĞ´®¿Ú·¢ËÍ·ÖÊ±´¦Àí£¬·ÀÖ¹´®¿Ú×ÊÔ´³åÍ»£¬ÈçÉÏ±¨Êı¾İµÄÊ±ºò´¥·¢ÁË°ó¶¨
+    pThis->CmdFlag |= (uint32_t)1<<(Cmd-1); //è®°å½•CMDï¼Œè¿›è¡Œä¸²å£å‘é€åˆ†æ—¶å¤„ç†ï¼Œé˜²æ­¢ä¸²å£èµ„æºå†²çªï¼Œå¦‚ä¸ŠæŠ¥æ•°æ®çš„æ—¶å€™è§¦å‘äº†ç»‘å®š
     return true;
 }
 
 
 /*
-* º¯ÊıÃû³Æ : Het_CP_Drive_DataSync
-* ¹¦ÄÜÃèÊö : Êı¾İÍ¬²½£¬¼´Ò»´ÎĞÔ·¢ËÍÈ«²¿Êı¾İ£¬¹²ÓÃID
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-             Cmd      - ¹¦ÄÜÂë
-             DataId   - Êı¾İID
-             pDataBuf - Êı¾İÖ¸Õë
-             DataLen  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : Het_CP_Drive_DataSync
+* åŠŸèƒ½æè¿° : æ•°æ®åŒæ­¥ï¼Œå³ä¸€æ¬¡æ€§å‘é€å…¨éƒ¨æ•°æ®ï¼Œå…±ç”¨ID
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+             Cmd      - åŠŸèƒ½ç 
+             DataId   - æ•°æ®ID
+             pDataBuf - æ•°æ®æŒ‡é’ˆ
+             DataLen  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static uint8_t Het_CP_Drive_DataSync(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_t DataId, uint8_t *pDataBuf, uint8_t DataLen)
@@ -218,37 +218,37 @@ static uint8_t Het_CP_Drive_DataSync(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_
 
     if (pThis->TX.SendDelay == HISTORY_SEND_IDLE)
     {
-        memset(pThis->TX.SendBuff, 0, CP_SEND_LEN);                    //·¢ËÍ×éÊı»º´æÇåÁã
-        //°üÍ·
+        memset(pThis->TX.SendBuff, 0, CP_SEND_LEN);                    //å‘é€ç»„æ•°ç¼“å­˜æ¸…é›¶
+        //åŒ…å¤´
         pThis->TX.SendBuff[send_len++] = CP_PACK_HEAD;
-        //¹¦ÄÜÂë
+        //åŠŸèƒ½ç 
         pThis->TX.SendBuff[send_len++] = Cmd;
-        //Êı¾İ×Ü³¤¶È
+        //æ•°æ®æ€»é•¿åº¦
         pThis->TX.SendBuff[send_len++] = (uint8_t)((DataLen+2) >> 8);
         pThis->TX.SendBuff[send_len++] = (uint8_t)((DataLen+2));
 
-        //Êı¾İID
+        //æ•°æ®ID
         pThis->TX.SendBuff[send_len++] = 0;
-        //Êı¾İ³¤¶È
+        //æ•°æ®é•¿åº¦
         pThis->TX.SendBuff[send_len++] = DataLen;
-        //Êı¾İÄÚÈİ
+        //æ•°æ®å†…å®¹
         memcpy(pThis->TX.SendBuff + send_len, pDataBuf, DataLen);
         send_len += DataLen;
         
 
-        //¼ÆËã checksum
+        //è®¡ç®— checksum
         Het_CP_Drive_CheckSum(pThis->TX.SendBuff + 1, send_len - 1, &checksum);
         pThis->TX.SendBuff[send_len++] = checksum;
-        //·¢ËÍÊı¾İ
-        pThis->TX.SendDelay = HET_CP_SEND_CYCLE;              //±£Ö¤Ã¿Ö¡·¢ËÍÊı¾İÖ®¼äÓĞ¼ä¸ô,±ÜÃâÁ¬Ğø·¢ËÍÊı¾İ  
+        //å‘é€æ•°æ®
+        pThis->TX.SendDelay = HET_CP_SEND_CYCLE;              //ä¿è¯æ¯å¸§å‘é€æ•°æ®ä¹‹é—´æœ‰é—´éš”,é¿å…è¿ç»­å‘é€æ•°æ®  
 
         if(Cmd == CMD_DATASYNC)
         {
-            pThis->CmdFlag &= ~(uint32_t)1<<(Cmd-1);              //Çå³ıCMD±êÖ¾
+            pThis->CmdFlag &= ~(uint32_t)1<<(Cmd-1);              //æ¸…é™¤CMDæ ‡å¿—
         }
         
         
-        pThis->Func.UartSendCallback(pThis->TX.SendBuff, send_len); //µ÷ÓÃ´®¿Úµ×²ã·¢ËÍº¯Êı
+        pThis->Func.UartSendCallback(pThis->TX.SendBuff, send_len); //è°ƒç”¨ä¸²å£åº•å±‚å‘é€å‡½æ•°
         
         return true; 
     }   
@@ -259,14 +259,14 @@ static uint8_t Het_CP_Drive_DataSync(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_
 }
 
 /*
-* º¯ÊıÃû³Æ : Het_CP_Drive_DataSend
-* ¹¦ÄÜÃèÊö : CPĞ­ÒéÊı¾İÕûÀí,²¢·¢ËÍ
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-             Cmd      - ¹¦ÄÜÂë
-             pDataBuf - Êı¾İÖ¸Õë
-             DataLen  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : Het_CP_Drive_DataSend
+* åŠŸèƒ½æè¿° : CPåè®®æ•°æ®æ•´ç†,å¹¶å‘é€
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+             Cmd      - åŠŸèƒ½ç 
+             pDataBuf - æ•°æ®æŒ‡é’ˆ
+             DataLen  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 static uint8_t Het_CP_Drive_DataSend(TS_HET_CP *pThis,TE_HET_CP_CMD Cmd, uint8_t *pBuf, uint16_t Len)
@@ -277,12 +277,12 @@ static uint8_t Het_CP_Drive_DataSend(TS_HET_CP *pThis,TE_HET_CP_CMD Cmd, uint8_t
     
     if (pThis->TX.SendDelay == HISTORY_SEND_IDLE)
     {
-        memset(pThis->TX.SendBuff, 0, CP_SEND_LEN);                    //·¢ËÍ×éÊı»º´æÇåÁã
-        //°üÍ·
+        memset(pThis->TX.SendBuff, 0, CP_SEND_LEN);                    //å‘é€ç»„æ•°ç¼“å­˜æ¸…é›¶
+        //åŒ…å¤´
         pThis->TX.SendBuff[send_len++] = CP_PACK_HEAD;
-        //¹¦ÄÜÂë
+        //åŠŸèƒ½ç 
         pThis->TX.SendBuff[send_len++] = Cmd;
-        //Êı¾İ×Ü³¤¶È
+        //æ•°æ®æ€»é•¿åº¦
         pThis->TX.SendBuff[send_len++] = (uint8_t)(Len >> 8);
         pThis->TX.SendBuff[send_len++] = (uint8_t)(Len);
          
@@ -291,21 +291,21 @@ static uint8_t Het_CP_Drive_DataSend(TS_HET_CP *pThis,TE_HET_CP_CMD Cmd, uint8_t
             memcpy(pThis->TX.SendBuff+send_len, pBuf, Len);
             if(Cmd == CMD_UPLOAD) 
             {
-                memset(pThis->TX.SendTempBuff,0,CP_SEND_TEMP_LEN);//Êı¾İÉÏ±¨ÃüÃû£¬¿½±´Íê¶ş¼¶»º´æºóÇåÁã
+                memset(pThis->TX.SendTempBuff,0,CP_SEND_TEMP_LEN);//æ•°æ®ä¸ŠæŠ¥å‘½åï¼Œæ‹·è´å®ŒäºŒçº§ç¼“å­˜åæ¸…é›¶
                 pThis->TX.UpdateIndex = 0;
             }
             
             send_len += Len;
         }
 
-        //¼ÆËã checksum
+        //è®¡ç®— checksum
         Het_CP_Drive_CheckSum(pThis->TX.SendBuff + 1, send_len - 1, &checksum);
         pThis->TX.SendBuff[send_len++] = checksum;
-        //·¢ËÍÊı¾İ
-        pThis->TX.SendDelay = HET_CP_SEND_CYCLE;              //±£Ö¤Ã¿Ö¡·¢ËÍÊı¾İÖ®¼äÓĞ¼ä¸ô,±ÜÃâÁ¬Ğø·¢ËÍÊı¾İ  
-        pThis->CmdFlag &= ~(uint32_t)1<<(Cmd-1);              //Çå³ıCMD±êÖ¾
+        //å‘é€æ•°æ®
+        pThis->TX.SendDelay = HET_CP_SEND_CYCLE;              //ä¿è¯æ¯å¸§å‘é€æ•°æ®ä¹‹é—´æœ‰é—´éš”,é¿å…è¿ç»­å‘é€æ•°æ®  
+        pThis->CmdFlag &= ~(uint32_t)1<<(Cmd-1);              //æ¸…é™¤CMDæ ‡å¿—
         
-        pThis->Func.UartSendCallback(pThis->TX.SendBuff, send_len); //µ÷ÓÃ´®¿Úµ×²ã·¢ËÍº¯Êı
+        pThis->Func.UartSendCallback(pThis->TX.SendBuff, send_len); //è°ƒç”¨ä¸²å£åº•å±‚å‘é€å‡½æ•°
         
         return true; 
     } 
@@ -319,11 +319,11 @@ static uint8_t Het_CP_Drive_DataSend(TS_HET_CP *pThis,TE_HET_CP_CMD Cmd, uint8_t
 
 
 /*
-* º¯ÊıÃû³Æ : Het_CP_Drive_Process
-* ¹¦ÄÜÃèÊö : CPÍ¨Ñ¶Á÷³Ì¿ØÖÆ×´Ì¬»ú
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-* ·µ»ØÖµ   : ¿Õ
-* Ê¾    Àı : Het_CP_Drive_Process();
+* å‡½æ•°åç§° : Het_CP_Drive_Process
+* åŠŸèƒ½æè¿° : CPé€šè®¯æµç¨‹æ§åˆ¶çŠ¶æ€æœº
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+* è¿”å›å€¼   : ç©º
+* ç¤º    ä¾‹ : Het_CP_Drive_Process();
 */
 /******************************************************************************/
 static void Het_CP_Drive_Process(TS_HET_CP *pThis)
@@ -339,94 +339,94 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
         pThis->RX.ReceiveF = false;
 
         
-        //½øĞĞ³ıÈ¥°üÍ·µÄÊı¾İĞ£Ñé
+        //è¿›è¡Œé™¤å»åŒ…å¤´çš„æ•°æ®æ ¡éªŒ
         Het_CP_Drive_CheckSum(pThis->RX.ReceiveBuf + 1, pThis->RX.ReceiveLen - 2, &checksum);
 
         if (checksum == pThis->RX.ReceiveBuf[pThis->RX.ReceiveLen - 1])
         {
-            //»ñÈ¡¹¦ÄÜÂëID
+            //è·å–åŠŸèƒ½ç ID
             cmd = pThis->RX.ReceiveBuf[CP_INDEX_CMD];
-            //»ñÈ¡Êı¾İ³¤¶È
+            //è·å–æ•°æ®é•¿åº¦
             len = ((uint16_t)pThis->RX.ReceiveBuf[CP_INDEX_DATA_LEN_H] << 8) 
                 | pThis->RX.ReceiveBuf[CP_INDEX_DATA_LEN_L];
-            //¼ì²é³¤¶È
+            //æ£€æŸ¥é•¿åº¦
             if (pThis->RX.ReceiveLen != (len + 5)) return; 
 
             switch(cmd)
             {
-                //defaultÖ®Ç°µÄcaseÒòÎªÎŞĞè´øÊı¾İÄÚÈİ£¬ËùÒÔ×ö³É×Ô¶¯Ó¦´ğ·½Ê½
-                //ĞÄÌø
+                //defaultä¹‹å‰çš„caseå› ä¸ºæ— éœ€å¸¦æ•°æ®å†…å®¹ï¼Œæ‰€ä»¥åšæˆè‡ªåŠ¨åº”ç­”æ–¹å¼
+                //å¿ƒè·³
                 case CMD_HEARTBEAT:
                     
                     #if CP_MODE == MASTER_MODE
-                    //MCUÊÕµ½Ä£×éĞÄÌø
+                    //MCUæ”¶åˆ°æ¨¡ç»„å¿ƒè·³
                     pThis->CmdFlag |= CMD_FLG_HEARTBEAT;
-                    pThis->CpStatus = pThis->RX.ReceiveBuf[CP_INDEX_DATA];//»ñÈ¡CPµÄÁ¬½Ó×´Ì¬
+                    pThis->CpStatus = pThis->RX.ReceiveBuf[CP_INDEX_DATA];//è·å–CPçš„è¿æ¥çŠ¶æ€
                     #else
-                    //Ä£×éÊÕµ½MCUÓ¦´ğ
+                    //æ¨¡ç»„æ”¶åˆ°MCUåº”ç­”
                     DEBUG("\nReceived heartbeat ACK!");
                     #endif
                     
                 break;
                 
-                //²éÑ¯²úÆ·ĞÅÏ¢
+                //æŸ¥è¯¢äº§å“ä¿¡æ¯
                 case CMD_DEVICEINFO:
                     
                     #if CP_MODE == MASTER_MODE
-                    //MCUÊÕµ½Ä£×é²éÑ¯²úÆ·ĞÅÏ¢Ö¸Áî
+                    //MCUæ”¶åˆ°æ¨¡ç»„æŸ¥è¯¢äº§å“ä¿¡æ¯æŒ‡ä»¤
                     pThis->CmdFlag |= CMD_FLG_DEVICEINFO;
                     #else
-                     //Ä£×éÊÕµ½MCU·¢À´µÄÉè±¸ĞÅÏ¢
+                     //æ¨¡ç»„æ”¶åˆ°MCUå‘æ¥çš„è®¾å¤‡ä¿¡æ¯
                     memcpy((uint8_t*)&s_DeviceInfo, &pThis->RX.ReceiveBuf[CP_INDEX_DATA], sizeof(TS_HET_CP_DEVICEINFO));
                     pThis->Func.DevInfoRxCallback(&s_DeviceInfo);
                     #endif
                     
                     break;  
                     
-                //Í¬²½Ê±¼ä
+                //åŒæ­¥æ—¶é—´
                 case CMD_GETDATE:
                     
                     #if CP_MODE == MASTER_MODE
-                   //MCUÊÕµ½Ä£×éÓ¦´ğµÄÊ±¼äĞÅÏ¢
+                   //MCUæ”¶åˆ°æ¨¡ç»„åº”ç­”çš„æ—¶é—´ä¿¡æ¯
                     pThis->Func.SyncTimeRxCallback(&pThis->RX.ReceiveBuf[CP_INDEX_DATA],len);
                     #else
-                    //Ä£×éÊÕµ½MCU·¢À´µÄ»ñÈ¡Ê±¼äĞÅÏ¢Ö¸Áî
+                    //æ¨¡ç»„æ”¶åˆ°MCUå‘æ¥çš„è·å–æ—¶é—´ä¿¡æ¯æŒ‡ä»¤
                     pThis->CmdFlag |= CMD_FLG_GETDATE;
                     #endif
 
                 break;
                 
-                //°ó¶¨
+                //ç»‘å®š
                 case CMD_BINDING:
                      
                     #if CP_MODE == MASTER_MODE
                     
                     #else
-                    //Ä£×éÊÕµ½MCU·¢À´µÄ°ó¶¨Ö¸Áî
+                    //æ¨¡ç»„æ”¶åˆ°MCUå‘æ¥çš„ç»‘å®šæŒ‡ä»¤
                     //DoBindProcess()
                     pThis->CmdFlag |= CMD_FLG_BINDING;  
                     #endif
                     
                     break;
                 
-                //²ú²â
+                //äº§æµ‹
                 case CMD_TEST:
                     
                     #if CP_MODE == MASTER_MODE
                     
                     #else
-                    //Ä£×éÊÕµ½MCU·¢À´µÄ²ú²âÖ¸Áî
+                    //æ¨¡ç»„æ”¶åˆ°MCUå‘æ¥çš„äº§æµ‹æŒ‡ä»¤
                     //DoFactoryTestProcess()
                     pThis->CmdFlag |= CMD_FLG_TEST;  
                     #endif
                     
                     break;
                 
-                //²ú²â½á¹û·µ»Ø
+                //äº§æµ‹ç»“æœè¿”å›
                 case CMD_TESTRESULT:
                     
                     #if CP_MODE == MASTER_MODE
-                    //»ñÈ¡²ú²â½á¹û
+                    //è·å–äº§æµ‹ç»“æœ
                     pThis->CpFactoryTestStatus = pThis->RX.ReceiveBuf[CP_INDEX_DATA];
                     pThis->CmdFlag |= CMD_FLG_TESTRESULT;
                     #else
@@ -436,11 +436,11 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
                     
                     break;
 
-                //Êı¾İÏÂ·¢
+                //æ•°æ®ä¸‹å‘
                 case CMD_DOWNLOAD:
                     
                     #if CP_MODE == MASTER_MODE
-                    //MCUÊÕµ½Ä£×éÏÂ·¢Êı¾İ´¦Àí
+                    //MCUæ”¶åˆ°æ¨¡ç»„ä¸‹å‘æ•°æ®å¤„ç†
                     pThis->Func.DownloadRxCallback(&pThis->RX.ReceiveBuf[CP_INDEX_DATA], len);
                     pThis->CmdFlag |= CMD_FLG_DOWNLOAD;
                     #else
@@ -449,39 +449,39 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
 
                     break;
                 
-                //Êı¾İÉÏ±¨
+                //æ•°æ®ä¸ŠæŠ¥
                 case CMD_UPLOAD:
                     
                     #if CP_MODE == MASTER_MODE
                     
                     #else
-                    //Ä£×éÊÕµ½MCUÊı¾İÉÏ±¨Ö¸Áî
+                    //æ¨¡ç»„æ”¶åˆ°MCUæ•°æ®ä¸ŠæŠ¥æŒ‡ä»¤
                     pThis->Func.UploadRxCallback(&pThis->RX.ReceiveBuf[CP_INDEX_DATA], len);
                     pThis->CmdFlag |= CMD_FLG_UPLOAD;
                     #endif
                     
                     break;
                 
-                //Êı¾İÍ¬²½
+                //æ•°æ®åŒæ­¥
                 case CMD_DATASYNC:
                     
                     #if CP_MODE == MASTER_MODE
-                    //MCUÊÕµ½Ä£×é·¢À´µÄÊı¾İÍ¬²½Ö¸Áî
+                    //MCUæ”¶åˆ°æ¨¡ç»„å‘æ¥çš„æ•°æ®åŒæ­¥æŒ‡ä»¤
                     pThis->CmdFlag |= CMD_FLG_DATASYNC;
                     #else
-                    //Ä£×éÊÕµ½MCU·¢À´µÄÊı¾İÍ¬²½ÄÚÈİ
+                    //æ¨¡ç»„æ”¶åˆ°MCUå‘æ¥çš„æ•°æ®åŒæ­¥å†…å®¹
                     pThis->Func.SyncDataRxCallback(&pThis->RX.ReceiveBuf[CP_INDEX_DATA], len);
                     #endif
                     
                     break;
                 
-                //¸´Î»
+                //å¤ä½
                 case CMD_RESET:
                     
                     #if CP_MODE == MASTER_MODE
                     
                     #else
-                    //Ä£×éÊÕµ½MCU·¢À´µÄ¸´Î»Ä£×éÖ¸Áî
+                    //æ¨¡ç»„æ”¶åˆ°MCUå‘æ¥çš„å¤ä½æ¨¡ç»„æŒ‡ä»¤
                     pThis->CmdFlag |= CMD_FLG_RESET;
                     #endif
                     
@@ -496,41 +496,41 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
     }
     else
     {
-        //Êı¾İÉÏ±¨
+        //æ•°æ®ä¸ŠæŠ¥
         if ((pThis->CmdFlag & CMD_FLG_UPLOAD) == CMD_FLG_UPLOAD)
         {
             #if CP_MODE == MASTER_MODE
             Het_CP_Drive_DataSend(pThis, CMD_UPLOAD, pThis->TX.SendTempBuff, pThis->TX.UpdateIndex);        
             #else
             
-            //Ä£×éÓ¦´ğMCUÊı¾İÉÏ±¨
+            //æ¨¡ç»„åº”ç­”MCUæ•°æ®ä¸ŠæŠ¥
             Het_CP_Drive_DataSend(pThis,CMD_UPLOAD,0,0);
             #endif
             
         }
-        //ĞÄÌøÓ¦´ğ
+        //å¿ƒè·³åº”ç­”
         else if ((pThis->CmdFlag & CMD_FLG_HEARTBEAT) == CMD_FLG_HEARTBEAT)
         {
             
             #if CP_MODE == MASTER_MODE
-            //mcuÓ¦´ğ
+            //mcuåº”ç­”
             Het_CP_Drive_DataSend(pThis,CMD_HEARTBEAT,0,0);
             #else
 
             #endif
         }
-        //Ó¦´ğ²úÆ·ĞÅÏ¢
+        //åº”ç­”äº§å“ä¿¡æ¯
         else if ((pThis->CmdFlag & CMD_FLG_DEVICEINFO) == CMD_FLG_DEVICEINFO)
         {
             
             #if CP_MODE == MASTER_MODE
-            //mcuÓ¦´ğ
+            //mcuåº”ç­”
             Het_CP_Drive_DataSend(pThis,CMD_DEVICEINFO, (uint8_t*)&s_DeviceInfo, sizeof(s_DeviceInfo));
              #else
 
             #endif
         }
-        //»ñÈ¡Ê±¼äĞÅÏ¢
+        //è·å–æ—¶é—´ä¿¡æ¯
         else if ((pThis->CmdFlag & CMD_FLG_GETDATE) == CMD_FLG_GETDATE)
         {
             
@@ -538,7 +538,7 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
             
             
             #else
-            //WiFiÄ£×éÓ¦´ğMCUµÄ»ñÈ¡Ê±¼äĞÅÏ¢Ö¸Áî
+            //WiFiæ¨¡ç»„åº”ç­”MCUçš„è·å–æ—¶é—´ä¿¡æ¯æŒ‡ä»¤
             if(pThis->TX.SendDelay == HISTORY_SEND_IDLE)
             {
                 pThis->Func.GetSysTimeInfo(&s_SysTime);
@@ -548,68 +548,68 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
             
             #endif
         }
-        //°ó¶¨
+        //ç»‘å®š
         else if ((pThis->CmdFlag & CMD_FLG_BINDING) == CMD_FLG_BINDING)
         {
             #if CP_MODE == MASTER_MODE
                 
             #else
-            //Ä£×éÓ¦´ğMCUµÄ°ó¶¨Ö¸Áî
+            //æ¨¡ç»„åº”ç­”MCUçš„ç»‘å®šæŒ‡ä»¤
             Het_CP_Drive_DataSend(pThis, CMD_BINDING, 0, 0);
             
             #endif
             
         }
-        //²ú²â
+        //äº§æµ‹
         else if ((pThis->CmdFlag & CMD_FLG_TEST) == CMD_FLG_TEST)
         {
             #if CP_MODE == MASTER_MODE
 
             #else
-            //Ä£×éÓ¦´ğMCUµÄ²ú²âÖ¸Áî
+            //æ¨¡ç»„åº”ç­”MCUçš„äº§æµ‹æŒ‡ä»¤
             if(pThis->TX.SendDelay == HISTORY_SEND_IDLE)
             {
                 Het_CP_Drive_DataSend(pThis, CMD_TEST, 0, 0);
-                pThis->Func.FactoryTest();//Ö´ĞĞ²ú²â¹¦ÄÜ
+                pThis->Func.FactoryTest();//æ‰§è¡Œäº§æµ‹åŠŸèƒ½
             }
             
             #endif
             
         }
-        //Ó¦´ğ²âÊÔ½á¹û
+        //åº”ç­”æµ‹è¯•ç»“æœ
         else if ((pThis->CmdFlag & CMD_FLG_TESTRESULT) == CMD_FLG_TESTRESULT)
         {
             #if CP_MODE == MASTER_MODE
-            //MCUÓ¦´ğÄ£×éµÄ²ú²â½á¹û
+            //MCUåº”ç­”æ¨¡ç»„çš„äº§æµ‹ç»“æœ
             Het_CP_Drive_DataSend(pThis, CMD_TESTRESULT, 0, 0);      
             #else
 
             #endif
         }
-        //Ó¦´ğÊı¾İÏÂ·¢
+        //åº”ç­”æ•°æ®ä¸‹å‘
         else if ((pThis->CmdFlag & CMD_FLG_DOWNLOAD) == CMD_FLG_DOWNLOAD)
         {
             
             #if CP_MODE == MASTER_MODE
-            //MCUÓ¦´ğÄ£×éÊı¾İÏÂ·¢Ö¸Áî
+            //MCUåº”ç­”æ¨¡ç»„æ•°æ®ä¸‹å‘æŒ‡ä»¤
             Het_CP_Drive_DataSend(pThis, CMD_DOWNLOAD, 0, 0);     
             #else
             Het_CP_Drive_DataSend(pThis, CMD_UPLOAD, pThis->TX.SendTempBuff, pThis->TX.UpdateIndex);        
             #endif
         }
         
-        //Êı¾İÍ¬²½
+        //æ•°æ®åŒæ­¥
         else if ((pThis->CmdFlag & CMD_FLG_DATASYNC) == CMD_FLG_DATASYNC)
         {
             
             #if CP_MODE == MASTER_MODE
-            //MCUÓ¦´ğÄ£×éÊı¾İÍ¬²½Ö¸Áî
+            //MCUåº”ç­”æ¨¡ç»„æ•°æ®åŒæ­¥æŒ‡ä»¤
             pThis->Func.SyncDataTxCallback();        
              #else
             
             #endif
         }
-        //¸´Î»
+        //å¤ä½
         else if ((pThis->CmdFlag & CMD_FLG_RESET) == CMD_FLG_RESET)
         {
             #if CP_MODE == MASTER_MODE
@@ -632,38 +632,38 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
 
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_Task
-* ¹¦ÄÜÃèÊö : CPÈÎÎñ£¬Ã¿10msÔËĞĞÒ»´Î
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : HET_CP_Task();
+* å‡½æ•°åç§° : HET_CP_Task
+* åŠŸèƒ½æè¿° : CPä»»åŠ¡ï¼Œæ¯10msè¿è¡Œä¸€æ¬¡
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : HET_CP_Task();
 */
 /******************************************************************************/
 void HET_CP_Task(TS_HET_CP *pThis)
 /******************************************************************************/
 {
     
-    // ¿ØÖÆ·¢ËÍ¼ä¸ô
+    // æ§åˆ¶å‘é€é—´éš”
     if(pThis->TX.SendDelay)
     {
-        pThis->TX.SendDelay--;          //´®¿ÚÁ¬Ğø·¢ËÍ¼ä¸ô¿ØÖÆ,±ÜÃâÁ¬Ğø·¢ËÍÊı¾İ
+        pThis->TX.SendDelay--;          //ä¸²å£è¿ç»­å‘é€é—´éš”æ§åˆ¶,é¿å…è¿ç»­å‘é€æ•°æ®
     }
 
-    // ÔËĞĞÍ¨Ñ¶Ğ­Òé×´Ì¬»ú
+    // è¿è¡Œé€šè®¯åè®®çŠ¶æ€æœº
     Het_CP_Drive_Process(pThis);
     
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_SendDataFrame
-* ¹¦ÄÜÃèÊö : ÓÃ»§Êı¾İ·¢ËÍº¯Êı
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-             Cmd      - ¹¦ÄÜÂë
-             DataId   - Êı¾İID
-             pDataBuf - Êı¾İÖ¸Õë
-             DataLen  - Êı¾İ³¤¶È
-* ·µ»ØÖµ   : ÎŞ
-* Ê¾    Àı : ÎŞ
+* å‡½æ•°åç§° : HET_CP_SendDataFrame
+* åŠŸèƒ½æè¿° : ç”¨æˆ·æ•°æ®å‘é€å‡½æ•°
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+             Cmd      - åŠŸèƒ½ç 
+             DataId   - æ•°æ®ID
+             pDataBuf - æ•°æ®æŒ‡é’ˆ
+             DataLen  - æ•°æ®é•¿åº¦
+* è¿”å›å€¼   : æ— 
+* ç¤º    ä¾‹ : æ— 
 */
 /******************************************************************************/
 uint8_t HET_CP_SendDataFrame(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_t DataId, uint8_t* pDataBuf, uint8_t DataLen)
@@ -671,13 +671,13 @@ uint8_t HET_CP_SendDataFrame(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_t DataId
 {
     uint8_t res = 0;
 
-    if(Cmd == CMD_DOWNLOAD || Cmd == CMD_UPLOAD || Cmd == CMD_DATASYNC) //Êı¾İÉÏ±¨
+    if(Cmd == CMD_DOWNLOAD || Cmd == CMD_UPLOAD || Cmd == CMD_DATASYNC) //æ•°æ®ä¸ŠæŠ¥
     {
-        if(DataId == 0) //È«²¿Êı¾İÄ£Ê½,Ö±½Ó¸üĞÂµ½Ò»¼¶»º´æ²¢Á¢¼´´¥·¢Ò»´Î´®¿Ú·¢ËÍ
+        if(DataId == 0) //å…¨éƒ¨æ•°æ®æ¨¡å¼,ç›´æ¥æ›´æ–°åˆ°ä¸€çº§ç¼“å­˜å¹¶ç«‹å³è§¦å‘ä¸€æ¬¡ä¸²å£å‘é€
         {
             res = Het_CP_Drive_DataSync(pThis, Cmd, DataId, pDataBuf, DataLen);
         }
-        else //µ¥Êı¾İÄ£Ê½£¬¸üĞÂÊı¾İµ½¶ş¼¶»º´æ£¬ÖÃ±ê¼ÇÎ»£¬·ÇÁ¢¼´·¢ËÍ
+        else //å•æ•°æ®æ¨¡å¼ï¼Œæ›´æ–°æ•°æ®åˆ°äºŒçº§ç¼“å­˜ï¼Œç½®æ ‡è®°ä½ï¼Œéç«‹å³å‘é€
         {
             res = Het_CP_Drive_UpdateSendTempBuf(pThis, DataId, pDataBuf, DataLen);
         }
@@ -690,11 +690,11 @@ uint8_t HET_CP_SendDataFrame(TS_HET_CP *pThis, TE_HET_CP_CMD Cmd, uint8_t DataId
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetConnectStatus
-* ¹¦ÄÜÃèÊö : »ñÈ¡Á¬½Ó×´Ì¬×Ö½Ú
-* ²Î    Êı : pThis    - ×é¼şÖ¸Õë
-* ·µ»ØÖµ   : Status - Á¬½Ó×´Ì¬×Ö½Ú
-* Ê¾    Àı : HET_CP_GetConnectStatus(&Status);
+* å‡½æ•°åç§° : HET_CP_GetConnectStatus
+* åŠŸèƒ½æè¿° : è·å–è¿æ¥çŠ¶æ€å­—èŠ‚
+* å‚    æ•° : pThis    - ç»„ä»¶æŒ‡é’ˆ
+* è¿”å›å€¼   : Status - è¿æ¥çŠ¶æ€å­—èŠ‚
+* ç¤º    ä¾‹ : HET_CP_GetConnectStatus(&Status);
 */
 /******************************************************************************/
 uint8_t HET_CP_GetConnectStatus(TS_HET_CP *pThis)
@@ -704,32 +704,32 @@ uint8_t HET_CP_GetConnectStatus(TS_HET_CP *pThis)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetNetStatus
-* ¹¦ÄÜÃèÊö : »ñÈ¡ÍøÂçÁ¬½Ó×´Ì¬
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : TE_HET_NET_STATUS - HET_ONLINE:ÔÚÏß
-                                 HET_OFFLINE:ÀëÏß
-* Ê¾    Àı : InterStatus = HET_CP_GetNetStatus();
+* å‡½æ•°åç§° : HET_CP_GetNetStatus
+* åŠŸèƒ½æè¿° : è·å–ç½‘ç»œè¿æ¥çŠ¶æ€
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : TE_HET_NET_STATUS - HET_ONLINE:åœ¨çº¿
+                                 HET_OFFLINE:ç¦»çº¿
+* ç¤º    ä¾‹ : InterStatus = HET_CP_GetNetStatus();
 */
 /******************************************************************************/
 TE_HET_NET_STATUS HET_CP_GetNetStatus(TS_HET_CP *pThis)
 /******************************************************************************/
 {     
-    if ((pThis->CpStatus & 0x70) == 0x70)      //ÅĞ¶ÏÊÇ·ñÔÚÏß
+    if ((pThis->CpStatus & 0x70) == 0x70)      //åˆ¤æ–­æ˜¯å¦åœ¨çº¿
     {
-        return HET_ONLINE;         //ÔÚÏß    
+        return HET_ONLINE;         //åœ¨çº¿    
     }
     else
     {
-        return HET_OFFLINE;        //ÀëÏß
+        return HET_OFFLINE;        //ç¦»çº¿
     }    
 }
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetSignalStrength
-* ¹¦ÄÜÃèÊö : »ñÈ¡WifiĞÅºÅÇ¿¶È
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : WiFiĞÅºÅÇ¿¶È0~10
-* Ê¾    Àı : CPSignalStrength = HET_CP_GetSignalStrength();
+* å‡½æ•°åç§° : HET_CP_GetSignalStrength
+* åŠŸèƒ½æè¿° : è·å–Wifiä¿¡å·å¼ºåº¦
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : WiFiä¿¡å·å¼ºåº¦0~10
+* ç¤º    ä¾‹ : CPSignalStrength = HET_CP_GetSignalStrength();
 */
 /******************************************************************************/
 uint8_t HET_CP_GetSignalStrength(TS_HET_CP *pThis)
@@ -738,18 +738,18 @@ uint8_t HET_CP_GetSignalStrength(TS_HET_CP *pThis)
     return (pThis->CpStatus & 0x0f);
 }
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetData
-* ¹¦ÄÜÃèÊö : »ñÈ¡Êı¾İ·¢ËÍ×´Ì¬
-* ²Î    Êı : ÎŞ
-* ·µ»ØÖµ   : HET_SEND_IDLE - ¿ÕÏĞ
-             HET_SEND_BUSY - ·¢ËÍÖÜÆÚÖĞ
-* Ê¾    Àı : Status = HET_CP_SendStatus();
+* å‡½æ•°åç§° : HET_CP_GetData
+* åŠŸèƒ½æè¿° : è·å–æ•°æ®å‘é€çŠ¶æ€
+* å‚    æ•° : æ— 
+* è¿”å›å€¼   : HET_SEND_IDLE - ç©ºé—²
+             HET_SEND_BUSY - å‘é€å‘¨æœŸä¸­
+* ç¤º    ä¾‹ : Status = HET_CP_SendStatus();
 */
 /******************************************************************************/
 TE_HET_SENDSTATUS HET_CP_SendStatus(TS_HET_CP *pThis)
 /******************************************************************************/
 {
-    //ÅĞ¶ÏÊÇ·ñ´¦ÓÚ·¢ËÍÖÜÆÚÖĞ
+    //åˆ¤æ–­æ˜¯å¦å¤„äºå‘é€å‘¨æœŸä¸­
     if (pThis->TX.SendDelay)
     {
         return HET_SEND_BUSY;
@@ -760,14 +760,14 @@ TE_HET_SENDSTATUS HET_CP_SendStatus(TS_HET_CP *pThis)
     }    
 }
 /*
-* º¯ÊıÃû³Æ : HET_CP_GetFactoryTestStatus
-* ¹¦ÄÜÃèÊö : »ñÈ¡²ú²â×´Ì¬
-* ²Î    Êı : ¿Õ
-* ·µ»ØÖµ   : FACTORY_IDLE(Î´²ú²â)
-             FACTORY_TESTING(²ú²âÖĞ)
-             FACTORY_FAIL(²ú²âÊ§°Ü)
-             FACTORY_PASS(²ú²â³É¹¦)
-* Ê¾    Àı : Status = HET_CP_GetFactoryTestStatus();
+* å‡½æ•°åç§° : HET_CP_GetFactoryTestStatus
+* åŠŸèƒ½æè¿° : è·å–äº§æµ‹çŠ¶æ€
+* å‚    æ•° : ç©º
+* è¿”å›å€¼   : FACTORY_IDLE(æœªäº§æµ‹)
+             FACTORY_TESTING(äº§æµ‹ä¸­)
+             FACTORY_FAIL(äº§æµ‹å¤±è´¥)
+             FACTORY_PASS(äº§æµ‹æˆåŠŸ)
+* ç¤º    ä¾‹ : Status = HET_CP_GetFactoryTestStatus();
 */
 /******************************************************************************/
 uint8_t HET_CP_GetFactoryTestStatus(TS_HET_CP* pThis)
@@ -777,10 +777,10 @@ uint8_t HET_CP_GetFactoryTestStatus(TS_HET_CP* pThis)
 }
 
 /*
-* º¯ÊıÃû³Æ : HET_CP_Open
-* ¹¦ÄÜÃèÊö : Ê¹ÄÜ×é¼ş
-* ²Î    Êı : pThis - ×é¼şÖ¸Õë
-* ·µ»ØÖµ   : TE_HET_STA£º´íÎó´úÂë
+* å‡½æ•°åç§° : HET_CP_Open
+* åŠŸèƒ½æè¿° : ä½¿èƒ½ç»„ä»¶
+* å‚    æ•° : pThis - ç»„ä»¶æŒ‡é’ˆ
+* è¿”å›å€¼   : TE_HET_STAï¼šé”™è¯¯ä»£ç 
 */
 /******************************************************************************/
 uint8_t HET_CP_Open(TS_HET_CP* pThis)
@@ -788,7 +788,7 @@ uint8_t HET_CP_Open(TS_HET_CP* pThis)
 {
     uint8_t i;
 
-    // ÅĞ¶ÏÊÇ·ñ»¹ÓĞ¿ÕÖ¸ÕëÊ¹ÓÃ
+    // åˆ¤æ–­æ˜¯å¦è¿˜æœ‰ç©ºæŒ‡é’ˆä½¿ç”¨
     for (i = 0; i < HET_PLUGIN_CP_NUM; i++)
     {
         if (0 == s_HetCP[i])
@@ -797,14 +797,14 @@ uint8_t HET_CP_Open(TS_HET_CP* pThis)
         }
     }
 
-    // ³¬³ö×é¼ş×î´ó¸öÊı
+    // è¶…å‡ºç»„ä»¶æœ€å¤§ä¸ªæ•°
     if (i >= HET_PLUGIN_CP_NUM)
     {
         //HET_ASSERT_PERROR(HET_ERROR_MAX);
         return 1;
     }
 
-    /* ²ÎÊı¼ì²é */
+    /* å‚æ•°æ£€æŸ¥ */
     if ((pThis == 0)
         || (pThis->Func.UartSendCallback == 0)
 #if CP_MODE == MASTER_MODE
@@ -823,11 +823,11 @@ uint8_t HET_CP_Open(TS_HET_CP* pThis)
     }
 
 
-    // Ö¸Õë¸³Öµ
+    // æŒ‡é’ˆèµ‹å€¼
     s_HetCP[i] = pThis;
 
     
-    // ´´½¨ÈÎÎñ
+    // åˆ›å»ºä»»åŠ¡
     //Thread_Create(HET_CP_Task);
 
     s_HetCPNum++;

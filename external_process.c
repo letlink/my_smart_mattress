@@ -86,7 +86,7 @@ static void ExternalProcessUartUploadRx(ExternalEvent* ev)
     {
         ituCheckBoxSetChecked((ITUCheckBox *)pWidget, false);
     }
-    MainMassageCheckBoxOnPress(pWidget, 0);
+
     
     //更新助眠开关显示
     pWidget = ituSceneFindWidget(&theScene, "mainSleepAidCheckBox");

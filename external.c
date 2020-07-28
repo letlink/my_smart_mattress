@@ -298,7 +298,7 @@ void ExternalInit(void)
     assert(extOutQueue != -1);
 
     extQuit = false;
-    
+
 #if defined(CFG_UART2_ENABLE) && !defined(CFG_DBG_UART2)
     #ifdef _WIN32
 	if(ComInit(WIN32_COM, CFG_UART2_BAUDRATE)) {

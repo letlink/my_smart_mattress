@@ -352,6 +352,7 @@ bool MainMassageCheckBoxOnPress(ITUWidget* widget, char* param)
         MassageStop();
         g_GUI_Data.massage_on_off = 0;
     }
+
     //发送数据到串口
     HET_GUI_SendDataFrame(CMD_DOWNLOAD, ID_MASSAGE_ON_OFF, LEN_MASSAGE_ON_OFF, (uint8_t*)&g_GUI_Data.massage_on_off);
 
