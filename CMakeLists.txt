@@ -151,6 +151,7 @@ add_executable(${CMAKE_PROJECT_NAME}
     string.c
     upgrade.c
     backup.c
+    buzzer.c
 	clife_lite/HET_ClifeProtocol.h
 	clife_lite/HET_ClifeProtocol.c
 	clife_lite/GUI_DataConfig.h
