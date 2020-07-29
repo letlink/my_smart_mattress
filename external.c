@@ -75,6 +75,8 @@ int ExternalInQueueSend(ExternalEvent* ev);
 int ExternalInOutQueueSend(ExternalEvent* ev);
 //------------------------------------------------------------------------------
 extern void ExternalOutQueueProcessEvent(ExternalEvent* ev);
+extern void BuzzerInit(void);
+
 /******************************************************************************\
                              Functions definitions
 \******************************************************************************/ 
@@ -320,6 +322,7 @@ void ExternalInit(void)
 
     //创建用户任务
     #if CLIFE_LITE_EN
+    BuzzerInit();
     extClifeQuit = false;
     HET_GUI_Init();
     pthread_create(&extClifeTask, NULL, ClifeTask, NULL);

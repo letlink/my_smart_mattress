@@ -8,9 +8,9 @@
 #include "ite/itp.h"
 //#include "openrtos/FreeRTOS.h"
 
-#define BEEP_TYPE           0 //0为IO控制的有缘蜂有源，1为PWM控制的无源蜂鸣器
+#define BEEP_TYPE           1 //0为IO控制的有缘蜂有源，1为PWM控制的无源蜂鸣器
 #define BEEP_GPIO_PIN	    18
-#define BEEP_GPIO_MODE	    ITH_GPIO_MODE0    //ITH_GPIO_MODE3
+#define BEEP_GPIO_MODE	    ITH_GPIO_MODE2    //ITH_GPIO_MODE3
 #define BEEP_PWM_NUM 		ITH_PWM2	      //ITH_PWM1
 /* IT970 sdk中timer預設使用狀況。
 1: IT976 backlight use
@@ -85,7 +85,8 @@ void BuzzerPlay(uint32_t msBeepInterval, uint32_t duty)
 
 void PlayKeyBeep(void)
 {
-	BuzzerPlay(50, BEEP_DUTY_CYCLE);
+	BuzzerPlay(100, BEEP_DUTY_CYCLE);
+    
 }
 
 void PlayConfigBeep(void)

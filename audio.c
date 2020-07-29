@@ -6,12 +6,16 @@
 #include "audio_mgr.h"
 #include "ctrlboard.h"
 
+#include "clife_lite/GUI_ClifeProtocol.h"
+#include "clife_lite/GUI_DataConfig.h"
+
 static bool                       audioInited;
 extern bool                       audioKeySoundPaused;
 static AudioPlayCallback          audioPlayCallback;
 static pthread_mutex_t            audioPlayMutex;
 
 extern MMP_INT smtkAudioMgrPlayNetwork(SMTK_AUDIO_PARAM_NETWORK* pNetwork);
+extern PlayKeyBeep(void);
 
 static int AudioPlayCallbackFunc(int state);
 
@@ -181,6 +185,10 @@ void AudioPlayKeySound(void)
         strcat(filepath, theConfig.keysound);
         AudioPlay(filepath, NULL);
 
+        if(g_GUI_Data.key_sound_on_off)
+        {
+            PlayKeyBeep();
+        }
     }
 }
 
