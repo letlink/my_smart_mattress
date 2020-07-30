@@ -6,6 +6,7 @@
 
 
 static ITUCheckBox* setSysKeySoundOnOffCheckBox;
+static ITUText* setSysBacklightPercentText;
 
 extern void BuzzerInit(void);
 extern void BuzzerExit(void);
@@ -30,6 +31,10 @@ bool SetSysLayerOnEnter(ITUWidget* widget, char* param)
     setSysKeySoundOnOffCheckBox = ituSceneFindWidget(&theScene, "setSysKeySoundOnOffCheckBox");
     assert(setSysKeySoundOnOffCheckBox);
 
+    setSysBacklightPercentText = ituSceneFindWidget(&theScene, "setSysBacklightPercentText");
+    assert(setSysBacklightPercentText);
+    
+
     if(g_GUI_Data.key_sound_on_off)
     {
         ituCheckBoxSetChecked(setSysKeySoundOnOffCheckBox, true);
@@ -43,6 +48,16 @@ bool SetSysLayerOnEnter(ITUWidget* widget, char* param)
 
 bool SetSysBacklightTrackBarChanged(ITUWidget* widget, char* param)
 {
+#ifdef _WIN32
+    
+#else
+    int max_brightness = ScreenGetMaxBrightness();
+    int set_brightness = atoi(ituTextGetString(setSysBacklightPercentText));
+    set_brightness = set_brightness / 10;
+    if (set_brightness > max_brightness) set_brightness = max_brightness;
+    ScreenSetBrightness(set_brightness);
+    HET_GUI_SendDataFrame(CMD_DOWNLOAD, ID_BACKLIGHT, LEN_BACKLIGHT, (uint8_t*)&g_GUI_Data.backlight);
+#endif
     return true;
 }
 

@@ -187,7 +187,11 @@ void AudioPlayKeySound(void)
 
         if(g_GUI_Data.key_sound_on_off)
         {
+#ifdef _WIN32
+            
+#else
             PlayKeyBeep();
+#endif
         }
     }
 }
