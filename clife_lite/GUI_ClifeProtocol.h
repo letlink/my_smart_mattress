@@ -9,8 +9,8 @@
                 1 首次创建 
 \******************************************************************************/
 
-#ifndef _PRODUCT_WIFI_H_
-#define _PRODUCT_WIFI_H_
+#ifndef _GUI_CLIFE_PROTOCOL_H_
+#define _GUI_CLIFE_PROTOCOL_H_
 
 /******************************************************************************\
                              Includes

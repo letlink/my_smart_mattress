@@ -15,7 +15,7 @@ void ScreenInit(void)
 {
     //ioctl(ITP_DEVICE_BACKLIGHT, ITP_IOCTL_SET_BRIGHTNESS, (void*)theConfig.brightness);
     screenSaverLastTick = SDL_GetTicks();
-    screenSaverCountDown = theConfig.screensaver_time * 60.0f;
+    screenSaverCountDown = theConfig.screensaver_time * 10.0f;
 	screenSaverCountDownAgain = theConfig.screensaver_time * 0.5f;
     screenOff = false;
 	doubleclick = false;
@@ -125,7 +125,7 @@ void ScreenOn(void)
 void ScreenSaverRefresh(void)
 {
     screenSaverLastTick = SDL_GetTicks();
-    screenSaverCountDown = theConfig.screensaver_time * 60.0f;
+    screenSaverCountDown = theConfig.screensaver_time * 10.0f;
 	screenSaverCountDownAgain = theConfig.screensaver_time * 0.5f;
 
 #if defined(CFG_POWER_WAKEUP_TOUCH_DOUBLE_CLICK)

@@ -8,11 +8,14 @@
 **  变更记录 :  V0.0.1/2020.06.29
                 1 首次创建   
 \******************************************************************************/
-// Example for UART frame reference
-// header     funcode    total_length    data0~N      checksum
-//  0XA5       0X07         0X0004      0X01020304       X
+/* 
+Example for UART frame reference
 
-// checksum = funcode + total_length + data0~N
+header     funcode    total_length      data0~N      checksum8(1Byte)
+ 0XA5        0X07         0X0004      0X01020304            X
+
+checksum = funcode + total_length + data0~N
+*/
 /******************************************************************************\
                                  Includes
 \******************************************************************************/
@@ -34,13 +37,14 @@
 #define EXT_MAX_QUEUE_SIZE          8
 #define MAX_OUTDATA_SIZE            250 //CP_RECV_LEN
 
-#define UartHeader     		        0xA5
+#define UART_HEADER     		    CP_PACK_HEAD//0xA5
 
 
 #ifdef _WIN32
 #define WIN32_COM                   MY_WIN32_COM
 #endif
 //------------------------------------------------------------------------------
+//串口接收流程
 typedef enum GET_UART_COMMAND_STATE_TAG
 {
     GET_HEADER,
@@ -62,7 +66,7 @@ static unsigned int payloadCount = 0;
 static unsigned char checkSum = 0;
 
 static unsigned int lengthCount = 0;
-static unsigned int  frameLength= 0;
+static unsigned int frameLength= 0;
 
 //------------------------------------------------------------------------------
 //用户任务
@@ -76,7 +80,6 @@ int ExternalInOutQueueSend(ExternalEvent* ev);
 //------------------------------------------------------------------------------
 extern void ExternalOutQueueProcessEvent(ExternalEvent* ev);
 extern void BuzzerInit(void);
-
 /******************************************************************************\
                              Functions definitions
 \******************************************************************************/ 
@@ -142,12 +145,12 @@ static void* ExternalTask(void* arg)
 		if (readLen)
 		{
             #if 1
-            printf("\r\n\r\nReceived: ");
+            printf("Received: \n");
             for (int i = 0; i < readLen; i++)
             {
                 printf("%02X ", inDataBuf[i]);
             }
-            //printf("\r\n");
+            printf("\n");
             #endif
             
 			while (readLen--)
@@ -155,7 +158,7 @@ static void* ExternalTask(void* arg)
 				switch (gState)
 				{
 					case GET_HEADER:
-						if (UartHeader == inDataBuf[count])
+						if (UART_HEADER == inDataBuf[count])
 						{
 							cmdBuf[cmdPos++] = inDataBuf[count];
                             gState = GET_FUNCODE;
@@ -331,7 +334,7 @@ void ExternalInit(void)
 
 /*
 * 函数名称 : ExternalExit
-* 功能描述 : 外部退出处理
+* 功能描述 : 外部任务退出处理
 * 参    数 : 无
 * 返回值   : 无
 * 示    例 : 无
@@ -352,7 +355,7 @@ void ExternalExit(void)
 /*
 * 函数名称 : ExternalInQueueReceive
 * 功能描述 : 查询队列中是否有收到消息,如查询队列中是否有用户任务往UI发送的消息
-* 参    数 : 无
+* 参    数 : ev - 事件指针
 * 返回值   : 无
 * 示    例 : 无
 */
@@ -374,7 +377,7 @@ int ExternalInQueueReceive(ExternalEvent* ev)
 /*
 * 函数名称 : ExternalOutQueueReceive
 * 功能描述 : 查询队列中是否有收到消息，如查询队列中是否有UI往用户任务发送的消息
-* 参    数 : 无
+* 参    数 : ev - 事件指针
 * 返回值   : 无
 * 示    例 : 无
 */
@@ -397,7 +400,7 @@ int ExternalOutQueueReceive(ExternalEvent* ev)
 * 函数名称 : ExternalInQueueSend
 * 功能描述 : 发送消息到队列中,用户任务往UI发送消息，
              比如串口任务接收到数据，根据数据发送对应的消息到UI，对UI进行更新或控制
-* 参    数 : ev - 消息指针
+* 参    数 : ev - 事件指针
 * 返回值   : 无
 * 示    例 : 无
 */
@@ -417,7 +420,7 @@ int ExternalInQueueSend(ExternalEvent* ev)
 * 函数名称 : ExternalOutQueueSend
 * 功能描述 : 发送消息到队列中,UI往用户任务发送消息，
              比如按了一个按键，发一条消息，在用户任务中收到消息后，发出对应的串口数据
-* 参    数 : ev - 消息指针
+* 参    数 : ev - 事件指针
 * 返回值   : 无
 * 示    例 : 无
 */

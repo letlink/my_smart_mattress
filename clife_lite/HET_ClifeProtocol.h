@@ -8,10 +8,8 @@
 **  变更记录 :  V0.0.1/2020.07.01
                 1 首次创建                 
 \******************************************************************************/
-
-#ifndef _HET_CLIFEPROTOCOL_H_
-#define _HET_CLIFEPROTOCOL_H_
-
+#ifndef _HET_CLIFE_PROTOCOL_H_
+#define _HET_CLIFE_PROTOCOL_H_
 /******************************************************************************\
                              Includes
 \******************************************************************************/	
@@ -81,43 +79,43 @@ typedef enum
     CMD_GETDATE    = 0x03,          	//获取时间信息
     CMD_BINDING    = 0x04,          	//绑定
     CMD_TEST       = 0x05,          	//产测
-    CMD_TESTRESULT = 0x06,             //产测结果返回
-    CMD_DOWNLOAD   = 0x07,             //数据下发
-    CMD_UPLOAD     = 0x08,             //数据上报
-    CMD_DATASYNC   = 0x09,             //数据同步
-    CMD_RESET      = 0x0A,             //复位
-    CMD_UNBIND     = 0x0B,             //解除绑定
+    CMD_TESTRESULT = 0x06,              //产测结果返回
+    CMD_DOWNLOAD   = 0x07,              //数据下发
+    CMD_UPLOAD     = 0x08,              //数据上报
+    CMD_DATASYNC   = 0x09,              //数据同步
+    CMD_RESET      = 0x0A,              //复位
+    CMD_UNBIND     = 0x0B,              //解除绑定
 
 }TE_HET_CP_CMD;
 
 //CP网络状态
 typedef enum
 {
-    HET_ONLINE,                                     //在线
-    HET_OFFLINE,                                    //离线
+    HET_ONLINE,                         //在线
+    HET_OFFLINE,                        //离线
 }TE_HET_NET_STATUS;
 
 //产测结果
 typedef enum
 {
-    FACTORY_IDLE,                                   //未产测
-    FACTORY_TESTING,                                //产测中
-    FACTORY_FAIL,                                   //产测失败
-    FACTORY_PASS,                                   //产测成功
+    FACTORY_IDLE,                       //未产测
+    FACTORY_TESTING,                    //产测中
+    FACTORY_FAIL,                       //产测失败
+    FACTORY_PASS,                       //产测成功
 }TE_HET_FACTORYTEST_RESULT;
 
 //串口数据发送状态
 typedef enum
 {
-    HET_SEND_IDLE,                                  //空闲状态
-    HET_SEND_BUSY,                                  //发送周期中
+    HET_SEND_IDLE,                      //空闲状态
+    HET_SEND_BUSY,                      //发送周期中
 }TE_HET_SENDSTATUS;
 //------------------------------------------------------------------------------
 typedef struct
 {
-    uint8_t 				    Id;				//数据ID
-    uint8_t 				    Len;			//数据长度
-    uint8_t* 				    pData;           //数据指针
+    uint8_t 				    Id;		//数据ID
+    uint8_t 				    Len;	//数据长度
+    uint8_t* 				    pData;  //数据指针
 }TS_HET_DATA_UNIT;
 
 //------------------------------------------------------------------------------
@@ -134,13 +132,13 @@ typedef struct
 //系统时间
 typedef struct
 {
-    uint8_t 				    Year;				//年
-    uint8_t 				    Month;				//月
-    uint8_t 				    Date;               //日
-    uint8_t 				    Hours;              //时
-    uint8_t 				    Minutes;            //分
-    uint8_t 				    Seconds;            //秒
-    uint8_t 				    Weekday;            //星期
+    uint8_t 				    Year;				        //年
+    uint8_t 				    Month;				        //月
+    uint8_t 				    Date;                       //日
+    uint8_t 				    Hours;                      //时
+    uint8_t 				    Minutes;                    //分
+    uint8_t 				    Seconds;                    //秒
+    uint8_t 				    Weekday;                    //星期
 }TS_HET_CP_TIME;
 
 //------------------------------------------------------------------------------
@@ -164,16 +162,16 @@ typedef struct
 //接收数据结构体
 typedef struct
 {
-    uint8_t					    SendTempBuff[CP_SEND_TEMP_LEN];//发送临时缓存
-    uint8_t					    SendBuff[CP_SEND_LEN];      //发送缓存
-    uint16_t                    UpdateIndex;                //发送更新索引，发送完成后清零
-    uint16_t                    SendDelay;                  //发送间隔
+    uint8_t					    SendTempBuff[CP_SEND_TEMP_LEN]; //发送临时缓存
+    uint8_t					    SendBuff[CP_SEND_LEN];          //发送缓存
+    uint16_t                    UpdateIndex;                    //发送更新索引，发送完成后清零
+    uint16_t                    SendDelay;                      //发送间隔
 }TS_CPCOMM_SEND;
 //------------------------------------------------------------------------------
 //函数指针结构体
 typedef struct
 {
-    void (*UartSendCallback) (uint8_t *pBuf, uint16_t Len);           // 串口发送回调
+    void (*UartSendCallback) (uint8_t *pBuf, uint16_t Len);            // 串口发送回调
 
     #if CP_MODE == MASTER_MODE
     void (*DownloadRxCallback)(uint8_t *pBuf, uint16_t Len);            // MCU接收数据下发处理回调

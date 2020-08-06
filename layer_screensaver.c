@@ -81,8 +81,8 @@ static ITUText* standbyTempText;
 
 typedef struct
 {
-    bool       FlagTab[FUN_STATUS_NUM];//ÒÀ´Î¶ÔÓ¦screensaverStatusSpriteÖĞµÄ¹¦ÄÜ¿ª¹Ø
-    ITUSprite* SpriteTab[FUN_STATUS_NUM];//ÒÀ´Î¶ÔÓ¦screensaverStatusSpriteÖĞµÄ¹¦ÄÜ¿ª¹Ø
+    bool       FlagTab[FUN_STATUS_NUM];//ä¾æ¬¡å¯¹åº”screensaverStatusSpriteä¸­çš„åŠŸèƒ½å¼€å…³
+    ITUSprite* SpriteTab[FUN_STATUS_NUM];//ä¾æ¬¡å¯¹åº”screensaverStatusSpriteä¸­çš„åŠŸèƒ½å¼€å…³
 }TS_FUN_STATUS;
 
 TS_FUN_STATUS FunStatus;
@@ -155,15 +155,15 @@ bool ScreensaverOnEnter(ITUWidget* widget, char* param)
     standbyTempText = ituSceneFindWidget(&theScene, "standbyTempText");
     assert(standbyTempText);
 
-    //»ñÈ¡WiFiĞÍºÅÇ¿¶È²¢Ó³ÉäÎªÏÔÊ¾Ë÷Òı
+    //è·å–WiFiå‹å·å¼ºåº¦å¹¶æ˜ å°„ä¸ºæ˜¾ç¤ºç´¢å¼•
     temp = 3;
     ShowWifiStatus(temp);
 
-    //»ñÈ¡µ±Ç°Ä£Ê½²¢Ó³ÉäÎªÏÔÊ¾Ë÷Òı
+    //è·å–å½“å‰æ¨¡å¼å¹¶æ˜ å°„ä¸ºæ˜¾ç¤ºç´¢å¼•
     temp = 2;
     ShowModeStatus(temp);
 
-    //»ñÈ¡×´Ì¬Í¼±êµÄ±êÖ¾²¢ÏÔÊ¾
+    //è·å–çŠ¶æ€å›¾æ ‡çš„æ ‡å¿—å¹¶æ˜¾ç¤º
     FunStatus.FlagTab[0] = 1;
     FunStatus.FlagTab[1] = 0;
     FunStatus.FlagTab[2] = 1;
@@ -171,13 +171,13 @@ bool ScreensaverOnEnter(ITUWidget* widget, char* param)
     FunStatus.FlagTab[4] = 1;
     ShowFunStatus(&FunStatus);
 
-    //ÎÂ¶ÈÏÔÊ¾
+    //æ¸©åº¦æ˜¾ç¤º
     temp = pGuiData->temperature;
     memset(str,0,sizeof(str));
     itoa(temp, str, 10);
     ituTextSetString(standbyTempText, str);
 
-    //Êª¶ÈÏÔÊ¾
+    //æ¹¿åº¦æ˜¾ç¤º
     temp = 60;
     memset(str,0,sizeof(str));
     itoa(temp, str, 10);

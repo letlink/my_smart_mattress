@@ -364,7 +364,7 @@ static void Het_CP_Drive_Process(TS_HET_CP *pThis)
                     pThis->CpStatus = pThis->RX.ReceiveBuf[CP_INDEX_DATA];//获取CP的连接状态
                     #else
                     //模组收到MCU应答
-                    DEBUG("\nReceived heartbeat ACK!");
+                    DEBUG("Received heartbeat ACK!\n");
                     #endif
                     
                 break;

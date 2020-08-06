@@ -277,7 +277,7 @@ static void HET_GUI_UartSendCallback(uint8_t *pBuf, uint16_t Len)
     {
         printf("%02X ", pBuf[i]);
     }
-    printf("\r\n");
+    printf("\n");
     #endif
     //--------------------------------------//
 }
@@ -312,7 +312,7 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
     pRead = pBuf;
     TotalLen = Len;
 
-    DEBUG("\r\n%s()", __func__);
+    DEBUG("%s()\n", __func__);
 
     while (TotalLen)
     {
@@ -320,7 +320,7 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
         DataId = *pRead++;
         if(DataId == 0) //ID为0用于数据同步指令
         {
-            DEBUG("\r\nReceived error data id: %d", DataId);
+            DEBUG("Received error data id: %d\n", DataId);
             return;
         }
         
@@ -335,7 +335,7 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
         }
         else
         {
-            DEBUG("\r\nReceived error data id: %d", DataLen);
+            DEBUG("Received error data id: %d\n", DataLen);
         }
 
         switch (DataId)
@@ -347,261 +347,261 @@ static void HET_GUI_UploadRxCallback(uint8_t *pBuf, uint16_t Len)
             
             case ID_MATTRESS_MODE:
                 pThis->mattress_mode = Temp;
-                DEBUG("\r\npThis->mattress_mode: 0X%02X", pThis->mattress_mode);
+                DEBUG("pThis->mattress_mode: 0X%02X\n", pThis->mattress_mode);
                 //UseDataToDoSomething();
                 break;
 
             case ID_MASSAGE_ON_OFF:
                 pThis->massage_on_off = Temp;
-                DEBUG("\r\npThis->massage_on_off: 0X%02X", pThis->massage_on_off);
+                DEBUG("pThis->massage_on_off: 0X%02X\n", pThis->massage_on_off);
                 //UseDataToDoSomething();
                 break;
 
             case ID_MASSAGE_MODE:
                 pThis->massage_mode = Temp;
-                DEBUG("\r\npThis->massage_mode: 0X%02X", pThis->massage_mode);
+                DEBUG("pThis->massage_mode: 0X%02X\n", pThis->massage_mode);
                 //UseDataToDoSomething();
                 break;
 
             case ID_MASSAGE_LEVEL:
                 pThis->massage_level = Temp;
-                DEBUG("\r\npThis->massage_level: 0X%02X", pThis->massage_level);
+                DEBUG("pThis->massage_level: 0X%02X\n", pThis->massage_level);
                 //UseDataToDoSomething();
                 break;
 
             case ID_MASSAGE_TIME_SET:
                 pThis->massage_time_set = Temp;
-                DEBUG("\r\npThis->massage_time: 0X%02X", pThis->massage_time_set);
+                DEBUG("pThis->massage_time: 0X%02X\n", pThis->massage_time_set);
                 //UseDataToDoSomething();
                 break;
 
             case ID_SLEEP_AID_ON_OFF:
                 pThis->sleep_aid_on_off = Temp;
-                DEBUG("\r\npThis->sleep_aid_on_off: 0X%02X", pThis->sleep_aid_on_off);
+                DEBUG("pThis->sleep_aid_on_off: 0X%02X\n", pThis->sleep_aid_on_off);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_SLEEP_AID_MUSIC_ON_OFF:
                 pThis->sleep_aid_music_on_off = Temp;
-                DEBUG("\r\npThis->sleep_aid_music_on_off: 0X%02X", pThis->sleep_aid_music_on_off);
+                DEBUG("pThis->sleep_aid_music_on_off: 0X%02X\n", pThis->sleep_aid_music_on_off);
             
                 //UseDataToDoSomething();
                 break;
 
             case ID_SLEEP_AID_MUSIC_INDEX:
                 pThis->sleep_aid_music_index = Temp;
-                DEBUG("\r\npThis->sleep_aid_music_index: 0X%02X", pThis->sleep_aid_music_index);
+                DEBUG("pThis->sleep_aid_music_index: 0X%02X\n", pThis->sleep_aid_music_index);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_SLEEP_AID_LIGHT_LEVEL:
                 pThis->sleep_aid_light_level = Temp;
-                DEBUG("\r\npThis->sleep_aid_light_level: 0X%02X", pThis->sleep_aid_light_level);
+                DEBUG("pThis->sleep_aid_light_level: 0X%02X\n", pThis->sleep_aid_light_level);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_SLEEP_AID_TIME:
                 pThis->sleep_aid_time = Temp;
-                DEBUG("\r\npThis->sleep_aid_time: 0X%02X", pThis->sleep_aid_time);
+                DEBUG("pThis->sleep_aid_time: 0X%02X\n", pThis->sleep_aid_time);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_SLEEP_AID_MODE:
                 pThis->sleep_aid_mode = Temp;
-                DEBUG("\r\npThis->sleep_aid_mode: 0X%02X", pThis->sleep_aid_mode);
+                DEBUG("pThis->sleep_aid_mode: 0X%02X\n", pThis->sleep_aid_mode);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_LAMP_ON_OFF:
                 pThis->lamp_on_off = Temp;
-                DEBUG("\r\npThis->lamp_on_off: 0X%02X", pThis->lamp_on_off);
+                DEBUG("pThis->lamp_on_off: 0X%02X\n", pThis->lamp_on_off);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_LAMP_LEVEL:
                 pThis->lamp_level = Temp;
-                DEBUG("\r\npThis->lamp_level: 0X%02X", pThis->lamp_level);
+                DEBUG("pThis->lamp_level: 0X%02X\n", pThis->lamp_level);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_LAMP_COLOUR_TEMPERATURE:
                 pThis->lamp_colour_temperature = Temp;
-                DEBUG("\r\npThis->lamp_colour_temperature: 0X%02X", pThis->lamp_colour_temperature);
+                DEBUG("pThis->lamp_colour_temperature: 0X%02X\n", pThis->lamp_colour_temperature);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM_MUSIC_ON_OFF:
                 pThis->alarm_music_on_off = Temp;
-                DEBUG("\r\npThis->alarm_music_on_off: 0X%02X", pThis->alarm_music_on_off);
+                DEBUG("pThis->alarm_music_on_off: 0X%02X\n", pThis->alarm_music_on_off);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM_MUSIC_INDEX:
                 pThis->alarm_music_index = Temp;
-                DEBUG("\r\npThis->alarm_music_index: 0X%02X", pThis->alarm_music_index);
+                DEBUG("pThis->alarm_music_index: 0X%02X\n", pThis->alarm_music_index);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM_OTHER_WAYS:
                 pThis->alarm_other_ways = Temp;
-                DEBUG("\r\npThis->alarm_other_ways: 0X%02X", pThis->alarm_other_ways);
+                DEBUG("pThis->alarm_other_ways: 0X%02X\n", pThis->alarm_other_ways);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM1_ON_OFF:
                 pThis->alarm1_on_off = Temp;
-                DEBUG("\r\npThis->alarm1_on_off: 0X%02X", pThis->alarm1_on_off);
+                DEBUG("pThis->alarm1_on_off: 0X%02X\n", pThis->alarm1_on_off);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM1_HOUR:
                 pThis->alarm1_hour = Temp;
-                DEBUG("\r\npThis->alarm1_hour: 0X%02X", pThis->alarm1_hour);
+                DEBUG("pThis->alarm1_hour: 0X%02X\n", pThis->alarm1_hour);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM1_MINUTE:
                 pThis->alarm1_minute = Temp;
-                DEBUG("\r\npThis->alarm1_minute: 0X%02X", pThis->alarm1_minute);
+                DEBUG("pThis->alarm1_minute: 0X%02X\n", pThis->alarm1_minute);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM1_WEEKDAY:
                 pThis->alarm1_weekday = Temp;
-                DEBUG("\r\npThis->alarm1_weekday: 0X%02X", pThis->alarm1_weekday);
+                DEBUG("pThis->alarm1_weekday: 0X%02X\n", pThis->alarm1_weekday);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM2_ON_OFF:
                 pThis->alarm2_on_off = Temp;
-                DEBUG("\r\npThis->alarm2_on_off: 0X%02X", pThis->alarm2_on_off);
+                DEBUG("pThis->alarm2_on_off: 0X%02X\n", pThis->alarm2_on_off);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM2_HOUR:
                 pThis->alarm2_hour = Temp;
-                DEBUG("\r\npThis->alarm2_hour: 0X%02X", pThis->alarm2_hour);
+                DEBUG("pThis->alarm2_hour: 0X%02X\n", pThis->alarm2_hour);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM2_MINUTE:
                 pThis->alarm2_minute = Temp;
-                DEBUG("\r\npThis->alarm2_minute: 0X%02X", pThis->alarm2_minute);
+                DEBUG("pThis->alarm2_minute: 0X%02X\n", pThis->alarm2_minute);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM2_WEEKDAY:
                 pThis->alarm2_weekday = Temp;
-                DEBUG("\r\npThis->alarm2_weekday: 0X%02X", pThis->alarm2_weekday);
+                DEBUG("pThis->alarm2_weekday: 0X%02X\n", pThis->alarm2_weekday);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM3_ON_OFF:
                 pThis->alarm3_on_off = Temp;
-                DEBUG("\r\npThis->alarm3_on_off: 0X%02X", pThis->alarm3_on_off);
+                DEBUG("pThis->alarm3_on_off: 0X%02X\n", pThis->alarm3_on_off);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM3_HOUR:
                 pThis->alarm3_hour = Temp;
-                DEBUG("\r\npThis->alarm3_hour: 0X%02X", pThis->alarm3_hour);
+                DEBUG("pThis->alarm3_hour: 0X%02X\n", pThis->alarm3_hour);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM3_MINUTE:
                 pThis->alarm3_minute = Temp;
-                DEBUG("\r\npThis->alarm3_minute: 0X%02X", pThis->alarm3_minute);
+                DEBUG("pThis->alarm3_minute: 0X%02X\n", pThis->alarm3_minute);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ALARM3_WEEKDAY:
                 pThis->alarm3_weekday = Temp;
-                DEBUG("\r\npThis->alarm3_weekday: 0X%02X", pThis->alarm3_weekday);
+                DEBUG("pThis->alarm3_weekday: 0X%02X\n", pThis->alarm3_weekday);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_STOP_SNORE_ON_OFF:
                 pThis->stop_snore_on_off = Temp;
-                DEBUG("\r\npThis->stop_snore_on_off: 0X%02X", pThis->stop_snore_on_off);
+                DEBUG("pThis->stop_snore_on_off: 0X%02X\n", pThis->stop_snore_on_off);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_SMART_SET_IN_BED:
                 pThis->smart_set_in_bed = Temp;
-                DEBUG("\r\npThis->sleep_aid_mode: 0X%02X", pThis->sleep_aid_mode);
+                DEBUG("pThis->sleep_aid_mode: 0X%02X\n", pThis->sleep_aid_mode);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_SMART_SET_AFTER_SLEEP:
                 pThis->smart_set_after_sleep = Temp;
-                DEBUG("\r\npThis->smart_set_after_sleep: 0X%02X", pThis->smart_set_after_sleep);
+                DEBUG("pThis->smart_set_after_sleep: 0X%02X\n", pThis->smart_set_after_sleep);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_SMART_SET_OUT_BED:
                 pThis->smart_set_out_bed = Temp;
-                DEBUG("\r\npThis->smart_set_out_bed: 0X%02X", pThis->smart_set_out_bed);
+                DEBUG("pThis->smart_set_out_bed: 0X%02X\n", pThis->smart_set_out_bed);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_TEMPERATURE:
                 pThis->temperature = Temp;
-                DEBUG("\r\npThis->temperature: 0X%02X", pThis->temperature);
+                DEBUG("pThis->temperature: 0X%02X\n", pThis->temperature);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_HUMIDITY:
                 pThis->humidity = Temp;
-                DEBUG("\r\npThis->humidity: 0X%02X", pThis->humidity);
+                DEBUG("pThis->humidity: 0X%02X\n", pThis->humidity);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_BACKLIGHT:
                 pThis->backlight = Temp;
-                DEBUG("\r\npThis->backlight: 0X%02X", pThis->backlight);
+                DEBUG("pThis->backlight: 0X%02X\n", pThis->backlight);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_TIME_STAMP:
                 pThis->time_stamp = Temp;
-                DEBUG("\r\npThis->time_stamp: 0X%02X", pThis->time_stamp);
+                DEBUG("pThis->time_stamp: 0X%02X\n", pThis->time_stamp);
 
                 //UseDataToDoSomething();
                 break;
 
             case ID_ERROR_CODE:
                 pThis->error_code = Temp;
-                DEBUG("\r\npThis->error_code: 0X%02X", pThis->error_code);
+                DEBUG("pThis->error_code: 0X%02X\n", pThis->error_code);
 
                 //UseDataToDoSomething();
                 break;
@@ -633,11 +633,11 @@ static void HET_GUI_DevInfoRxCallback(TS_HET_CP_DEVICEINFO* pThis)
     ExternalEvent ev = {0};
     //DoDevInfoProcess();
 
-    DEBUG("\r\n%s()", __func__);
-    DEBUG("\r\nSoftware Ver:%d", pThis->SoftwareVer);
-    DEBUG("\r\nHardware Ver:%d", pThis->HardwareVer);
-    DEBUG("\r\nProduct model:%s", pThis->DeviceProductModel);
-    DEBUG("\r\nReseved:%s", pThis->Reserve2);
+    DEBUG("%s()\n", __func__);
+    DEBUG("Software Ver:%d\n", pThis->SoftwareVer);
+    DEBUG("Hardware Ver:%d\n", pThis->HardwareVer);
+    DEBUG("Product model:%s\n", pThis->DeviceProductModel);
+    DEBUG("Reseved:%s\n", pThis->Reserve2);
 
     //发送消息到UI任务，更新UI控件
     ev.type = EXTERNAL_UART_DEV_INFO_RX;
@@ -661,7 +661,7 @@ static void HET_GUI_SyncDataRxCallback(uint8_t *pBuf, uint16_t Len)
     ExternalEvent ev = {0};
     //DoSyncDataProcess();
 
-    DEBUG("\r\n%s()", __func__);
+    DEBUG("%s()\n", __func__);
 
     //发送消息到UI任务，更新UI控件
     ev.type = EXTERNAL_UART_SYNC_DATA_RX;
@@ -690,8 +690,8 @@ static void HET_GUI_GetSysTimeInfo(TS_HET_CP_TIME* pTime)
     pTime->Seconds = 0;
     pTime->Weekday = 3;
     
-    DEBUG("\r\n%s()", __func__);
-    DEBUG("\r\n%d-%02d-%02d %02d:%02d:%02d weekday:%d", 
+    DEBUG("%s()\n", __func__);
+    DEBUG("%d-%02d-%02d %02d:%02d:%02d weekday:%d\n", 
         pTime->Year, pTime->Month, pTime->Date, pTime->Hours, pTime->Minutes, pTime->Seconds, pTime->Weekday
         );
     return;
@@ -711,8 +711,8 @@ static void HET_GUI_FactoryTest(void)
     ExternalEvent ev = {0};
     //DoFactoryTest();
     static uint8_t test = 0;
-    DEBUG("\r\n%s()", __func__);
-    DEBUG("%d", test++);
+    DEBUG("%s()\n", __func__);
+
 
     //发送消息到UI任务，更新UI控件
     ev.type = EXTERNAL_UART_SYNC_DATA_RX;
@@ -735,7 +735,7 @@ static void HET_GUI_ResetProcess(void)
     ExternalEvent ev = {0};
     //DoResetProcess();
 
-    DEBUG("\r\n%s()", __func__);
+    DEBUG("%s()\n", __func__);
 
     //发送消息到UI任务，更新UI控件
     ev.type = EXTERNAL_UART_SYNC_DATA_RX;

@@ -1,7 +1,7 @@
 ﻿/******************************************************************************\
 **  版    权 :  深圳市和而泰智能控制股份有限公司所有（2020）
-**  文件名称 :  external.c
-**  功能描述 :  基于C-LIFE简化版协议的串口收发处理任务
+**  文件名称 :  external_process.c
+**  功能描述 :  任务消息处理
 **  作    者 :  vincent
 **  日    期 :  2020.06.29
 **  版    本 :  V0.0.1
@@ -13,6 +13,8 @@
 \******************************************************************************/
 #include <assert.h>
 #include <stdlib.h>
+#include <sys/time.h>
+
 #include "SDL/SDL.h"
 #include "ctrlboard.h"
 #include "scene.h"
@@ -22,11 +24,15 @@
 /******************************************************************************\
                              Variables definitions
 \******************************************************************************/
-static TS_GUI_DATA GuiDataLast;
+//static TS_GUI_DATA GuiDataLast;
+//------------------------------------------------------------------------------
 extern bool MainMassageCheckBoxOnPress(ITUWidget* widget, char* param);
+extern void MassageStart(void);
+extern void MassageStop(void);
+//------------------------------------------------------------------------------
 /*
 * 函数名称 : ExternalProcessUartUploadRx
-* 功能描述 : 收到串口任务发来的消息，根据串口发来的消息更新控件
+* 功能描述 : 收到串口任务发来的消息(上行数据，即MCU-->GUI)，根据串口发来的消息更新控件
 * 参    数 : ev -- 消息指针
 * 返回值   : 无
 * 示    例 : 无
@@ -81,10 +87,12 @@ static void ExternalProcessUartUploadRx(ExternalEvent* ev)
     if(g_GUI_Data.massage_on_off)
     {
         ituCheckBoxSetChecked((ITUCheckBox *)pWidget, true);
+        MassageStart();
     }
     else
     {
         ituCheckBoxSetChecked((ITUCheckBox *)pWidget, false);
+        MassageStop();
     }
 
     
@@ -195,14 +203,50 @@ static void ExternalProcessUartUploadRx(ExternalEvent* ev)
 
 
     //更新当前湿度显示
-
     memset(str, 0, sizeof(str));
     itoa(pThis->humidity, str, 10);
     pWidget = ituSceneFindWidget(&theScene, "standbyHumiText");
     ituTextSetString((ITUText *)pWidget, str);
 
+    //更新RTC时间和数字时钟的显示
+    struct timezone tz;
+    struct timeval tv;
+    struct tm *tm, mytime;
+    char buf[8];
+    static uint32_t time_stamp_bak = 0;
+    if(time_stamp_bak != pThis->time_stamp)
+    {
+        time_stamp_bak = pThis->time_stamp;
 
-    
+        if (pThis->time_stamp <= LONG_MAX)
+        {
+            //gettimeofday(&tv, NULL);
+            tv.tv_sec = pThis->time_stamp;//测试用的时间戳 1596429000，换算为时间应该是2020-08-03 12:30:00 周一//  //获取时间戳,约定为北京时间
+            tv.tv_usec = 0;
+            //tm = localtime(&tv.tv_sec);    //转换为TM结构
+            //memcpy(&mytime, tm, sizeof (struct tm));
+            //mytime.tm_year = 2020; 
+            //mytime.tm_mon = 8;
+
+            //tv.tv_sec = mktime(&mytime);
+            //tv.tv_usec = 0;
+            tz.tz_minuteswest = 480; //设置时区，480/60 = 8小时
+            tz.tz_dsttime = 0;       //不进行时间修正
+
+
+            settimeofday(&tv, &tz);  //设置时间
+
+            gettimeofday(&tv, NULL);
+            tm = localtime(&tv.tv_sec);
+            printf("Read time after set : %d-%02d-%02d  %02d:%02d:%02d weekday:%d\n", 
+                tm->tm_year+1900,tm->tm_mon+1,tm->tm_mday,tm->tm_hour,tm->tm_min,tm->tm_sec,tm->tm_wday);
+
+        }
+        else
+        {
+            printf("[ERROR] pThis->time_stamp: %d is big than LONG_MAX!\n", pThis->time_stamp);
+        }
+    }
     return;
 }
 
@@ -222,7 +266,7 @@ static void ExternalProcessUartTx(ExternalEvent* ev)
 
 /*
 * 函数名称 : ExternalInQueueProcessEvent
-* 功能描述 : 收到外部任务发给UI的消息，执行对应操作
+* 功能描述 : UI任务接收到消息并进行处理
 * 参    数 : ev -- 消息指针
 * 返回值   : 无
 * 示    例 : 无
@@ -291,7 +335,7 @@ void ExternalInQueueProcessEvent(ExternalEvent* ev)
 
 /*
 * 函数名称 : ExternalOutQueueProcessEvent
-* 功能描述 : 收到UI任务发给外部任务的消息，执行对应操作
+* 功能描述 : 收到UI任务发出的消息并进行处理
 * 参    数 : ev -- 消息指针
 * 返回值   : 无
 * 示    例 : 无
@@ -325,9 +369,5 @@ void ExternalOutQueueProcessEvent(ExternalEvent* ev)
 void ExternalProcessInit(void)
 /******************************************************************************/
 {
-   // buttonLayer = ituSceneFindWidget(&theScene, "buttonLayer");
-  //  assert(buttonLayer);
-
-    //buttonCoverFlow = ituSceneFindWidget(&theScene, "buttonCoverFlow");
-    //assert(buttonCoverFlow);
+   ;
 }
