@@ -223,16 +223,9 @@ static void ExternalProcessUartUploadRx(ExternalEvent* ev)
             //gettimeofday(&tv, NULL);
             tv.tv_sec = pThis->time_stamp;//测试用的时间戳 1596429000，换算为时间应该是2020-08-03 12:30:00 周一//  //获取时间戳,约定为北京时间
             tv.tv_usec = 0;
-            //tm = localtime(&tv.tv_sec);    //转换为TM结构
-            //memcpy(&mytime, tm, sizeof (struct tm));
-            //mytime.tm_year = 2020; 
-            //mytime.tm_mon = 8;
-
-            //tv.tv_sec = mktime(&mytime);
-            //tv.tv_usec = 0;
+            
             tz.tz_minuteswest = 480; //设置时区，480/60 = 8小时
             tz.tz_dsttime = 0;       //不进行时间修正
-
 
             settimeofday(&tv, &tz);  //设置时间
 
